@@ -23,7 +23,7 @@ TODO
 
 ### <a name="technologies" title="The technologies used to build this application">A list of the technologies used in this software</a>
 <ul>
-    <li>TODO</li>
+    <li>UML</li>
 </ul>
 
 ### <a name="credits" title="Credit given to all of this application's contributors">A list of contributors for this project</a>
