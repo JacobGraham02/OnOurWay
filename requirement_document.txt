@@ -1,0 +1,30 @@
+1. Registration form (web application can have an HTML form). The form input for the user image must have a ‘required’ attribute. 
+Default carpool locations to Barrie or Orillia. Require any valid photo id as long as it has a picture. 
+Can use any document as long as there is a photo for identification purposes. You are asked whether to be a driver or passenger when you are registering initially. 
+Registration setup is changed depending on passenger or driver.
+
+2. Driver inputs information into input fields (insurance policy number, drivers license number, effective and expiry date for insurance and drivers license). 
+Credit info: Name, Number, CVC, expiry date
+
+3. Driver would handle schedule time and number of people for vehicle. Form with input fields for schedule time and number of people per vehicle. 
+Form for people to sign up and join a carpool. System will have to dynamically update the number of available spots for the carpool. 
+Confirmation message for user registering for a spot. 
+
+4. Table that lists carpools in Barrie with their address. Query from google maps to get the list. Search bar that has an address that pulls in closest carpools to that. 
+Driver can set their own carpool place. 
+
+5. There is a price range available for a carpool. Price per distance with respect to time. everyone wants to get to the destination. 
+Initial set up as Driver you can set time, number of passengers, starting point and destination. Auto-generates based on distance gives the driver a range to choose from. 
+When passengers are signing up, a price range would be shown. Let passengers tip afterwards. 
+
+6. An online ticket can be sent to a users email, phone, etc. Some type of validation on the ticket. 
+User’s ticket will be validated when they arrive at the carpool location. 
+
+7. 24-hour cancellation notice before a cancellation fee is applied. First 12 hours of 24 is a small cancellation fee. 
+Anything under that is the original fee for the carpool. Late fees will apply. General rule on website: 15 minutes late and the driver’s discretion about whether to 
+wait for you or leave. 
+
+8. User payments will go through system. After that, the system will handle payments. 
+Drivers have to enter their payment information to receive payments from passengers. If we have to use some payment system, use Stripe for credit card payments. 
+
+Build the website using JavaScript (client) and NodeJs (server). Check to see if web version is good enough on phone. Otherwise, make a dedicated app. 

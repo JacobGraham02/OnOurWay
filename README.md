@@ -10,7 +10,7 @@
 <br/>
 
 ### <a name="disclaimer" title="A disclaimer or word of caution before using this project commercially">Disclaimer</a>
-TODO
+This project is being built as a semester-long project for a Software Engineering course at Lakehead University (COMP 3415). Therefore, this application may not include various security or performance standards which are common to similar applications used worldwide. As of September 18, 2022, when development for this application has been completed, you are free to use it however you please. 
 
 ### <a name="description" title="A detailed description of our application and the requirements for design and implementation">A description of this software</a>
 TODO
@@ -28,5 +28,11 @@ TODO
 
 ### <a name="credits" title="Credit given to all of this application's contributors">A list of contributors for this project</a>
 <ul>
-    <li>TODO</li>
+    <li>Jacob Graham</li>
+    <li>Andreas Lentini</li>
+    <li>Owen Laurie</li>
+    <li>Preston Beck</li>
+    <li>Xavier Flores</li>
+    <li>Branden Yoshaev</li>
+    <li>Ivan Korogodin</li>
 </ul>
