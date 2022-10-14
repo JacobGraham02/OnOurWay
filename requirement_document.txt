@@ -1,30 +1,47 @@
-1. Registration form (web application can have an HTML form). The form input for the user image must have a ‘required’ attribute. 
-Default carpool locations to Barrie or Orillia. Require any valid photo id as long as it has a picture. 
-Can use any document as long as there is a photo for identification purposes. You are asked whether to be a driver or passenger when you are registering initially. 
-Registration setup is changed depending on passenger or driver.
+Requirement document – team 3 Carpool Reservation Service
+	The following document outlines the requirements for our project of choice; the ‘Carpool Reservation System’. 
+    The following details are included: project purpose, intended audience, intended use, and project description. Additionally, 
+    there are also functional requirements, quality requirements, platform requirements, and process requirements. 
 
-2. Driver inputs information into input fields (insurance policy number, drivers license number, effective and expiry date for insurance and drivers license). 
-Credit info: Name, Number, CVC, expiry date
+	Purpose: To offer an affordable, simple, and unique carpool experience for everybody in Barrie and, optionally, Orillia. 
+	Intended use: To provide a carpooling service to those who wish to carpool with others. 
+	Intended audience: People who wish to travel in a group to some destination at a cheaper price compared to public transit.    
 
-3. Driver would handle schedule time and number of people for vehicle. Form with input fields for schedule time and number of people per vehicle. 
-Form for people to sign up and join a carpool. System will have to dynamically update the number of available spots for the carpool. 
-Confirmation message for user registering for a spot. 
+Functional requirements:
+	There will be a cloud-based relational database which will be used by our application to store all data which may be used in the future. This database will be hosted on a popular platform such as Microsoft Azure.
+	There will be several client-side HTML forms that will be submitted to our server-side for processing. When processing is completed, a success or error message will be generated and sent to the client depending on the status of the form after processing has been completed.
+	The application will contain, among others, a section which lists a table of all available carpool locations in Barrie and, optionally, Orillia. 
+When a user purchased a ticket for a carpool, the ticket will sent as a pdf to either their email or phone number, depending on the contact method of their choice. At the carpool departure the ticket will be checked by the system. 
+	In the event a ticket is cancelled, the current date will be compared with the ticket purchase date to see if they have a difference of more than 24 hours. If the difference in time between the 2 dates is less than 24 hours, cancellation fees will apply to the user’s payment method depending on the time of the cancellation. Anytime from 12 - 24 hours will charge 20% of the ticket cost, and 0 – 11 hours will apply 100% of the ticket cost. 
+	
+Quality requirements:
+	The response time of the system must be less than or equal to 5 seconds
 
-4. Table that lists carpools in Barrie with their address. Query from google maps to get the list. Search bar that has an address that pulls in closest carpools to that. 
-Driver can set their own carpool place. 
+    Bandwidth will be, by default, 1.0 Mbps per user. 
 
-5. There is a price range available for a carpool. Price per distance with respect to time. everyone wants to get to the destination. 
-Initial set up as Driver you can set time, number of passengers, starting point and destination. Auto-generates based on distance gives the driver a range to choose from. 
-When passengers are signing up, a price range would be shown. Let passengers tip afterwards. 
+	Throughput will be measured by the number of successful transactions in our system. Therefore, our throughput must guarantee that at least 95% of the 
+    total number of transactions in our system are successful.
 
-6. An online ticket can be sent to a users email, phone, etc. Some type of validation on the ticket. 
-User’s ticket will be validated when they arrive at the carpool location. 
+	Resource usage will be handled server-side by whichever backend we choose to host on. Database connections, data queries, user profile information, 
+    Google Maps queries, etc. will he handled here and will be given as little as possible to a client to minimize the resources used. 
 
-7. 24-hour cancellation notice before a cancellation fee is applied. First 12 hours of 24 is a small cancellation fee. 
-Anything under that is the original fee for the carpool. Late fees will apply. General rule on website: 15 minutes late and the driver’s discretion about whether to 
-wait for you or leave. 
+	The reliability of the system must be enough that it can handle at least 1000 transactions per second at any given time without decreasing in performance. 
 
-8. User payments will go through system. After that, the system will handle payments. 
-Drivers have to enter their payment information to receive payments from passengers. If we have to use some payment system, use Stripe for credit card payments. 
+	The availability of the system must be at least 99%. That is, the site should have at least 99% uptime. Specifically, below is the maximum downtimes for the framework:
+	    Daily: 1 minute, 26 seconds
+	    Weekly: 10 minutes, 4 seconds
+	    Monthly: 43 minutes, 49 seconds
+	    Yearly: 8 hours, 45 minutes, 56 seconds
 
-Build the website using JavaScript (client) and NodeJs (server). Check to see if web version is good enough on phone. Otherwise, make a dedicated app. 
+
+	
+
+Process requirements
+	The creation of our carpooling software system will chronologically follow the timelines stated in the ‘CS 3415 Team Project schedule’, as shown below:   
+The list is subject to change if there is a change in functionality, or if the design process takes longer than anticipated. The project is equally split into 
+separate important steps which include database design and connectivity, setting up our project according to the system design, implementing server-side data 
+validation and security processes, and creating proper HTML forms. Team members will choose what functionality they will add to the project and keep a timeline 
+revolving around this. The version control system  chosen for this project is git, and by extension, GitHub. Commits will be made to the project repository by 
+each team member, with a detailed descriptions of what was added. Our team will separate project development into multiple stages which will make us more 
+focused on each part of the project equally. Saying this, we will focus more implementing the ‘Waterfall development method’ for our project. 
+

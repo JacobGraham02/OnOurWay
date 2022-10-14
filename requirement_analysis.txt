@@ -1,0 +1,35 @@
+
+Requirement analysis – team 3 Carpool Reservation Service
+ 
+    A registration form (HTML form) is needed for both the web and mobile application.  According to the project requirements, 
+there must be an input element which accepts uploaded images (mandatory) for the purpose of user identification and validation. 
+Before you are able to register your account, you must choose whether you want to be a driver or passenger; you are able to change your designation 
+as a driver or passenger after you have successfully registered your account. Registration set up is different depending on whether you are 
+registering as a driver or passenger. 
+
+    The specific information a driver must provide are all of the following: their insurance policy number, driver’s license number, and effective 
+and expiration date for their insurance policy and driver’s license. Information a passenger and driver must provide are all of the following: name on credit card, 
+credit card number, CVC, and effective and expiration date. They must also provide their contact information including phone number and email address. 
+
+    On the application page, there will be a list of carpools in Barrie with their addresses queried from Google Maps, or retrieved from a database. 
+Each driver would handle their own schedule time and the number of people for their vehicle (HTML form). Once a driver has completed the form for their own carpool, 
+they must submit the form for validation. After validation, users will be able to reserve a spot in the carpool in the form of a ticket. A success or 
+error message will be displayed depending on the status of their registration. 
+
+    By default, the price range for carpools’ tickets are calculated by distance with respect to time because everybody wants to arrive at the destination. 
+Drivers initially set the carpool time, number of passengers, and the carpool departure and destination points. Ticket prices for the carpool auto-generates 
+based on the distance between the two prior points and gives the driver a price range to choose from. When users are reserving a spot, the price would 
+show as whatever the driver chose. Optionally, users can tip the driver after the carpool is finished.
+
+    When the user successfully reserves a spot in a carpool, the ticket for that carpool will be sent to their email, phone, or both, depending on what the 
+user chooses. The ticket will be validated at the carpool’s departure to ensure it is valid. 
+
+    For each ticket a user has purchased, a 24-hour cancellation fee is applied and the user is informed of this. 
+If the user cancels a carpool ticket anywhere from 24 to 12 hours before the carpool is scheduled to departure, a 20% late fee will be applied to the user. 
+Anywhere from 0 to 12 hours before the carpool is scheduled to departure will require the user to pay the original ticket price. 
+
+    A driver is required to wait for 15 minutes after the scheduled departure time if any passenger is not present (they may be late). 
+After 15 minutes has passed, it is at the driver’s discretion about whether to wait for the late passenger to show up. 
+User payments will go through the backend of our application. After payment is submitted through our application, the payment will be submitted and processed by Stripe.  
+
+JavaScript is our group’s programming language of choice for building this project. 
