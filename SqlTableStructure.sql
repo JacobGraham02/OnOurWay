@@ -2,7 +2,7 @@
 
 USE OnOurWay;
 
--- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
+DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
 
 CREATE TABLE Customer (
 	id int NOT NULL PRIMARY KEY UNIQUE,
@@ -16,9 +16,16 @@ CREATE TABLE Customer (
     email varchar(100) NOT NULL UNIQUE
 );
 
+CREATE TABLE Ticket (
+	id int NOT NULL PRIMARY KEY UNIQUE,
+    effective_date DATE NOT NULL,
+    expiry_date DATE NOT NULL
+);
+
 CREATE TABLE Passenger (
 	id int NOT NULL PRIMARY KEY UNIQUE,
-    FOREIGN KEY (id) REFERENCES Customer (id)
+    FOREIGN KEY (id) REFERENCES Customer (id),
+    FOREIGN KEY (id) REFERENCES Ticket (id)
 );
 
 CREATE TABLE Driver (
@@ -33,13 +40,6 @@ CREATE TABLE Driver (
     total_drives int DEFAULT 0,
     total_distance_driven_km DECIMAL(9,1), # 8 digits to the left of decimal place, 1 to the right. ########.#
     FOREIGN KEY (id) REFERENCES Customer (id)
-);
-
-CREATE TABLE Ticket (
-	id int NOT NULL PRIMARY KEY UNIQUE,
-    effective_date DATE NOT NULL,
-    expiry_date DATE NOT NULL,
-    FOREIGN KEY (id) REFERENCES Passenger (id)
 );
 
 CREATE TABLE Carpool (
