@@ -1,8 +1,7 @@
--- CREATE DATABASE OnOurWay; 
+CREATE DATABASE IF NOT EXISTS OnOurWay; 
 
 USE OnOurWay;
-
--- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
+DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
 
 CREATE TABLE Customer (
 	id int NOT NULL PRIMARY KEY UNIQUE,
