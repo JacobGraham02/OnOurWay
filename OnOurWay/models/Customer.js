@@ -1,4 +1,4 @@
-import {getDateAsString as stringConverter} from '../modules/DateFormatter.js';
+import {validateEmail, validateFirstName, validateLastName, validatePhoneNumber} from '../modules/RegexStringValidator';
 
 class Customer {
 
@@ -12,5 +12,29 @@ class Customer {
         this.phone_number = phone;
         this.email_address = email;
         this.photo_identification = photo_id;
+    }
+
+    /**
+     * @param {string} first
+     */
+    set firstName(first) {
+        if (validateFirstName(first)) {
+            this.first_name = first;
+        }
+    }
+    set lastName(last) {
+        if (validateLastName(last)) {
+            this.last_name = last;
+        }
+    }
+    set emailAddress(email) {
+        if (validateEmail(email)) {
+            this.email_address = email;
+        }
+    }
+    set phoneNumber(phone) {
+        if (validatePhoneNumber(phone)) {
+            this.phone_number = phone;
+        }
     }
 }

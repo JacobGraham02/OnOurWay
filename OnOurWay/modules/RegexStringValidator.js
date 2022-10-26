@@ -1,6 +1,7 @@
 const email_regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 const first_name_regex = new RegExp(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/)
 const last_name_regex = new RegExp(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/)
+const phone_number_regex = new RegExp(/^[(]?[0-9]{3}[)]?[ ,-]?[0-9]{3}[ ,-]?[0-9]{4}$/);
 
 /**
  * /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -26,10 +27,20 @@ function validateFirstName(first_name) {
  * /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/
  * Uses a last name regex string to validate a supplied last name
  * @param {string} last_name 
- * @returns true or false depending on if the value for last_name matches the last name regexs
+ * @returns true or false depending on if the value for last_name matches the last name regex
  */
 function validateLastName(last_name) {
     return last_name_regex.test(last_name);
 }
 
-export {validateEmail, validateFirstName, validateLastName};
+/**
+ * /^[(]?[0-9]{3}[)]?[ ,-]?[0-9]{3}[ ,-]?[0-9]{4}$/
+ * Uses a phone number regex string to validate a supplied phone number (North America format)
+ * @param {string} phone 
+ * @returns true or false depending on if the value for phone matches the phone number regex
+ */
+function validatePhoneNumber(phone) {
+    return phone_number_regex.test(phone);
+}
+
+export {validateEmail, validateFirstName, validateLastName, validatePhoneNumber};
