@@ -9,6 +9,14 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+app.get('/', function(request, response) {
+  response.send();
+});
+
+app.listen(3003, function() {
+  console.log("This application is listening to port 3000");
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
