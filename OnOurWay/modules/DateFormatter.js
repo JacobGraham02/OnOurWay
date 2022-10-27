@@ -31,8 +31,6 @@ days_formatter.set(7, "Saturday");
  * @param {integer} year 
  * @returns string of the form: day of week, month day of month, year; e.g. Wednesday, October 26, 2022
  */
-function getDateAsString(day_of_week, month, day_of_month, year) {
+exports.getDateAsString = function getDateAsString(day_of_week, month, day_of_month, year) {
     return `${days_formatter.get(day_of_week)}, ${months_formatter.get(month)} ${day_of_month}, ${year}`;
 }
-
-export {getDateAsString};

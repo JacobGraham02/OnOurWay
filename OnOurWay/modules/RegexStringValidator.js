@@ -9,7 +9,7 @@ const phone_number_regex = new RegExp(/^[(]?[0-9]{3}[)]?[ ,-]?[0-9]{3}[ ,-]?[0-9
  * @param {string} email_address 
  * @returns true or false depending on if the value for email_address matches the email regex
  */
-function validateEmail(email_address) {
+exports.validateEmail = function validateEmail(email_address) {
     return email_regex.test(email_address);
 }
 
@@ -19,7 +19,7 @@ function validateEmail(email_address) {
  * @param {string} first_name 
  * @returns true or false depending on if the value for first_name matches the first name regex
  */
-function validateFirstName(first_name) {
+exports.validateFirstName = function validateFirstName(first_name) {
     return first_name_regex.test(first_name)
 }
 
@@ -29,7 +29,7 @@ function validateFirstName(first_name) {
  * @param {string} last_name 
  * @returns true or false depending on if the value for last_name matches the last name regex
  */
-function validateLastName(last_name) {
+exports.validateLastName = function validateLastName(last_name) {
     return last_name_regex.test(last_name);
 }
 
@@ -39,8 +39,6 @@ function validateLastName(last_name) {
  * @param {string} phone 
  * @returns true or false depending on if the value for phone matches the phone number regex
  */
-function validatePhoneNumber(phone) {
+exports.validatePhoneNumber = function validatePhoneNumber(phone) {
     return phone_number_regex.test(phone);
 }
-
-export {validateEmail, validateFirstName, validateLastName, validatePhoneNumber};

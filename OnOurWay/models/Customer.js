@@ -1,4 +1,4 @@
-import {validateEmail, validateFirstName, validateLastName, validatePhoneNumber} from '../modules/RegexStringValidator';
+var name_validations = require('../modules/DateFormatter.js');
 
 class Customer {
 
