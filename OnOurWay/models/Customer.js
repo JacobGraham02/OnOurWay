@@ -1,8 +1,9 @@
-var name_validations = require('../modules/DateFormatter.js');
+var regex_string_validations = require('../modules/RegexStringValidator.js');
 
 class Customer {
 
     constructor(first, last, card_number, card_cvc, card_start, card_end, phone, email, photo_id) {
+        this.id = id;
         this.first_name = first;
         this.last_name = last;
         this.credit_card_number = card_number;
@@ -18,22 +19,22 @@ class Customer {
      * @param {string} first
      */
     set firstName(first) {
-        if (validateFirstName(first)) {
+        if (regex_string_validations.validateFirstName(first)) {
             this.first_name = first;
         }
     }
     set lastName(last) {
-        if (validateLastName(last)) {
+        if (regex_string_validations.validateLastName(last)) {
             this.last_name = last;
         }
     }
     set emailAddress(email) {
-        if (validateEmail(email)) {
+        if (regex_string_validations.validateEmail(email)) {
             this.email_address = email;
         }
     }
     set phoneNumber(phone) {
-        if (validatePhoneNumber(phone)) {
+        if (regex_string_validations.validatePhoneNumber(phone)) {
             this.phone_number = phone;
         }
     }
