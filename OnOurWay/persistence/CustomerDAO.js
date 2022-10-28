@@ -1,3 +1,4 @@
-var database_manager = require('./persistence/DatabaseConnectionManager');
-var mysql = require('mysql');
+var database_manager = require('./DatabaseConnectionManager');
+var mysql = require('mysql2');
+
 
