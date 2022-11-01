@@ -17,13 +17,4 @@ const initialize_database_connection_pool = mysql.createPool({
   database: database_name
 });
 
-const getDatabaseConnection = function() {
-  return initialize_database_connection_pool.getConnection(function(error, connection) {
-    if (error) {
-      throw error; 
-    }
-  });
-}
-
 exports.initialize_database_connection_pool = initialize_database_connection_pool;
-exports.getDatabaseConnection = getDatabaseConnection();
