@@ -3,7 +3,7 @@ var regex_string_validations = require('../modules/RegexStringValidator.js');
 class Carpool {
 
     min_passengers = 0;
-    max_passengers = 20;
+    max_passengers = 9;
     street_address_length = 20;
     /**
      * 

@@ -1,7 +1,7 @@
 var database_manager = require('./DatabaseConnectionManager');
 var mysql = require('mysql2');
 
-const getAllFromCustomer = function() {
+const getAllFromVehicle = function() {
     const query_string = `SELECT * FROM Customer`;
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool.getConnection(function(error, connection) {
@@ -16,7 +16,7 @@ const getAllFromCustomer = function() {
     });
 };
 
-const getSpecificCustomer= function(where) {
+const getSpecificVehicle = function(where) {
     const where_clause = concatenateSqlQueryStringForWhereClause(where);
     let query_string = `SELECT * FROM CUSTOMER WHERE ${where_clause} LIMIT 1000`;
     return new Promise(function(resolve, reject) {
@@ -32,7 +32,7 @@ const getSpecificCustomer= function(where) {
     });
 };
 
-const addCustomer = function(customer) {
+const addVehicle = function(customer) {
     let query_string = `INSERT INTO CUSTOMER (first_name, last_name, credit_card_number, credit_card_cvc, credit_card_effective_date, credit_card_expiry_date, phone_number, 
         email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     return new Promise(function(resolve, reject) {
@@ -49,7 +49,7 @@ const addCustomer = function(customer) {
     });
 };
 
-const updateCustomer = function(query_data) {
+const updateVehicle = function(query_data) {
     const column_and_values_sql_string = concatenateSqlQueryStringForUpdate(query_data.column_names, query_data.column_values, query_data.total_columns);
     const where_clause_string = concatenateSqlQueryStringForWhereClause(query_data.where_clause);
     let query_string = `UPDATE CUSTOMER SET ${column_and_values_sql_string} WHERE ${where_clause_string}`;
@@ -66,7 +66,7 @@ const updateCustomer = function(query_data) {
     });
 };
 
-const deleteCustomer = function(where) {
+const deleteVehicle = function(where) {
     const where_clause_string = concatenateSqlQueryStringForWhereClause(where);  
     let query_string = `DELETE FROM CUSTOMER WHERE ${where_clause_string}`;
     return new Promise(function(resolve, reject) {
@@ -108,11 +108,11 @@ function concatenateSqlQueryStringForUpdate(column_names, column_values, total_c
     return query_string;
 };
 
-exports.getAllFromCustomer = getAllFromCustomer;
-exports.getSpecificCustomer = getSpecificCustomer;
-exports.addCustomer = addCustomer;
-exports.updateCustomer = updateCustomer;
-exports.deleteCustomer = deleteCustomer;
+exports.getAllFromVehicle = getAllFromVehicle;
+exports.getSpecificVehicle = getSpecificVehicle;
+exports.addVehicle = addVehicle;
+exports.updateVehicle = updateVehicle;
+exports.deleteVehicle = deleteVehicle;
 
 /*
 const customer = {
