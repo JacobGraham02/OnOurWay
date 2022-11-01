@@ -1,10 +1,13 @@
-CREATE DATABASE IF NOT EXISTS OnOurWay; 
+-- CREATE DATABASE IF NOT EXISTS OnOurWay; 
 
-USE OnOurWay;
-DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
+-- DROP DATABASE onourway;
+-- CREATE DATABASE onourway;
+-- USE onourway;
 
+-- USE OnOurWay;
+-- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
 CREATE TABLE Customer (
-	id int NOT NULL PRIMARY KEY UNIQUE,
+	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
 	first_name varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
     credit_card_number varchar(20) NOT NULL UNIQUE,
@@ -14,14 +17,15 @@ CREATE TABLE Customer (
     phone_number varchar(100) NOT NULL UNIQUE,
     email varchar(100) NOT NULL UNIQUE
 );
+ALTER TABLE Customer ADD path_to_image varchar(255);
 
 CREATE TABLE Passenger (
-	id int NOT NULL PRIMARY KEY UNIQUE,
+	id int NOT NULL PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES Customer (id)
 );
 
 CREATE TABLE Driver (
-	id int NOT NULL PRIMARY KEY UNIQUE,
+	id int NOT NULL PRIMARY KEY,
     drivers_license_number varchar(100) NOT NULL UNIQUE,
     drivers_license_effective_date DATE NOT NULL,
     drivers_license_expiry_date DATE NOT NULL,
@@ -35,14 +39,14 @@ CREATE TABLE Driver (
 );
 
 CREATE TABLE Ticket (
-	id int NOT NULL PRIMARY KEY UNIQUE,
+	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
     effective_date DATE NOT NULL,
     expiry_date DATE NOT NULL,
     FOREIGN KEY (id) REFERENCES Passenger (id)
 );
 
 CREATE TABLE Carpool (
-	id int NOT NULL PRIMARY KEY UNIQUE,
+	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
     address varchar(100) NOT NULL,
     maximum_passengers int NOT NULL CONSTRAINT max_passengers_nine CHECK (maximum_passengers <= 9)
 );
@@ -57,15 +61,15 @@ CREATE TABLE Vehicle (
 );
 
 CREATE TABLE Carpool_Passenger (
-	id int NOT NULL PRIMARY KEY UNIQUE,
-    carpool_id int NOT NULL UNIQUE,
+	id int NOT NULL PRIMARY KEY,
+    carpool_id int NOT NULL,
     FOREIGN KEY (id) REFERENCES Passenger (id),
     FOREIGN KEY (carpool_id) REFERENCES Carpool (id)
 );
 
 CREATE TABLE Driver_car (
-	id int NOT NULL PRIMARY KEY UNIQUE,
-    vehicle_id int NOT NULL UNIQUE,
+	id int NOT NULL PRIMARY KEY,
+    vehicle_id int NOT NULL,
     FOREIGN KEY (id) REFERENCES Driver (id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicle (id)
 );
