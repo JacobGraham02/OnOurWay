@@ -17,12 +17,8 @@ const stripe_publishable_key = process.env.stripe_publishable_key;
 const stripe_secret_key = process.env.stripe_secret_key;
 const stripe = require('stripe')(stripe_secret_key);
 
-app.get('/', function(request, response) {
-  response.send();
-});
-
-app.listen(3003, function() {
-  console.log("This application is listening to port 3000");
+app.listen(3005, function() {
+  console.log("This application is listening to port 3005");
 });
 
 // view engine setup
@@ -44,7 +40,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.post('/create_stripe_payment_session', async (req, res) => {
+app.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
@@ -65,6 +61,7 @@ app.post('/create_stripe_payment_session', async (req, res) => {
 
   res.redirect(303, session.url);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
