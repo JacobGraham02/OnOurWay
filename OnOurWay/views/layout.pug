@@ -6,7 +6,8 @@ html
   body
 ul.navbar
   li.navbar-item
-    img.navbar-logo(src='/images/onourway.png')
+    a(href='/index')
+      img.navbar-logo(src='/images/onourway.png')
   li.navbar-item
     a I hate
   li.navbar-item
@@ -14,8 +15,8 @@ ul.navbar
   li.navbar-item
     a class :)
   li.navbar-item.navbar-item-right-align
-    a Login
+    a(href='/login') Login
   li.navbar-item.navbar-item-right-align
-    a Sign-up
+    a(href='/signup') Sign-up
 
 block content
