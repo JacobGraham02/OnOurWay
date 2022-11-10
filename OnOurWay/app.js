@@ -43,29 +43,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price_data: {
-          currency: 'cad',
-          product_data: {
-            name: req.body.product,
-          },
-          unit_amount: req.body.unit_amount,
-        },
-        quantity: req.body.quantity,
-      },
-    ],
-    mode: 'payment',
-    success_url: '/stripe',
-    cancel_url: '/stripe',
-  });
-
-  res.redirect(303, session.url);
-});
-
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
