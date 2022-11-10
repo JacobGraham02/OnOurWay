@@ -1,4 +1,4 @@
-var validateDate = require('../modules/DateFormatter.js');
+var validate_data = require('../modules/DateFormatter.js');
 
 class Ticket {
 
