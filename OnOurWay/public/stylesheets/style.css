@@ -1,4 +1,8 @@
-
+#google-maps-gui {
+  border: 2px dashed green;
+  height: 80%;
+  width: 80%;
+}
 :root {
   --primary-color: #32a431;
   --primary-light-color: #6ad660;
