@@ -137,3 +137,6 @@
 .margin-left-128 {
   margin-left: 128px;
 }
+.easteregg{
+  background-image: url('/images/fractal4.jpg');
+}
