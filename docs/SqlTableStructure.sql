@@ -2,16 +2,9 @@
 
 -- DROP DATABASE onourway;
 -- CREATE DATABASE onourway;
-USE onourway;
-SELECT User, Host FROM mysql.user;
-SHOW GRANTS FOR 'onourway';
-GRANT ALL PRIVILEGES ON onourway.* TO 'onourway'@'localhost'; 
-SELECT User, Host FROM mysql.user;
-CREATE USER 'onourway'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON onourway.* TO 'onourway'@'localhost';
-FLUSH PRIVILEGES;
--- USE OnOurWay;
+USE OnOurWay;
 -- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
+DROP TABLE IF EXISTS carpool, carpool_passenger;
 CREATE TABLE Customer (
     id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
     username varchar(25) NOT NULL UNIQUE,
@@ -26,6 +19,9 @@ CREATE TABLE Customer (
     phone_number varchar(100) NOT NULL UNIQUE,
     email varchar(100) NOT NULL UNIQUE
 );
+
+INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
+
 ALTER TABLE Customer ADD path_to_image varchar(255);
 
 CREATE TABLE Passenger (
@@ -56,7 +52,8 @@ CREATE TABLE Ticket (
 
 CREATE TABLE Carpool (
 	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
-    address varchar(100) NOT NULL,
+    starting_address varchar(100),
+    ending_address varchar(100),
     maximum_passengers int NOT NULL CONSTRAINT max_passengers_nine CHECK (maximum_passengers <= 9)
 );
 
