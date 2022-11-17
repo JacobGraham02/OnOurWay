@@ -2,13 +2,22 @@
 
 -- DROP DATABASE onourway;
 -- CREATE DATABASE onourway;
--- USE onourway;
-
+USE onourway;
+SELECT User, Host FROM mysql.user;
+SHOW GRANTS FOR 'onourway';
+GRANT ALL PRIVILEGES ON onourway.* TO 'onourway'@'localhost'; 
+SELECT User, Host FROM mysql.user;
+CREATE USER 'onourway'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON onourway.* TO 'onourway'@'localhost';
+FLUSH PRIVILEGES;
 -- USE OnOurWay;
 -- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
 CREATE TABLE Customer (
-	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
-	first_name varchar(100) NOT NULL,
+    id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
+    username varchar(25) NOT NULL UNIQUE,
+    password varchar(255) NOT NULL UNIQUE,
+    salt varchar(255) NOT NULL UNIQUE,
+    first_name varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
     credit_card_number varchar(20) NOT NULL UNIQUE,
     credit_card_cvc char(3) NOT NULL,
