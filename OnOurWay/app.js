@@ -19,6 +19,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var stripeRouter = require('./routes/stripe');
 var customerRouter = require('./routes/customer');
+var carpoolRouter = require('./routes/carpool');
 var database_manager = require('./persistence/DatabaseConnectionManager');
 var MySQLStore = require('express-mysql-session')(session);
 
@@ -67,6 +68,7 @@ app.use('/users', usersRouter);
 app.use('/stripe', stripeRouter);
 app.use('/driver', driverRouter);
 app.use('/customer', customerRouter);
+app.use('/carpool', carpoolRouter);
 
 const usernameAndPasswordFormFields = {
   username_field: 'username',
