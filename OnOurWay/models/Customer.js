@@ -2,22 +2,11 @@ var regex_string_validations = require('../modules/RegexStringValidator.js');
 
 class Customer {
 
-    /**
-     * For a customer class, photo id is a string because the database will only store the path to the image file. 
-     * Setters are implicitly called when assigning constructor parameter variable values to object properties reference by 'this'. 
-     * @param {int} id
-     * @param {string} first 
-     * @param {string} last 
-     * @param {string} card_number 
-     * @param {char} card_cvc 
-     * @param {Date} card_start 
-     * @param {Date} card_end 
-     * @param {string} phone 
-     * @param {string} email 
-     * @param {string} photo_id 
-     */
-    constructor(id, first, last, card_number, card_cvc, card_start, card_end, phone, email, photo_id) {
+    constructor(id, first, last, username, password, salt, card_number, card_cvc, card_start, card_end, phone, email, photo_id) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
         this.first_name = first;
         this.last_name = last;
         this.credit_card_number = card_number;
@@ -33,6 +22,14 @@ class Customer {
         if (id >= 0) {
             this.id = id;
         }
+    }
+
+    set username(user_name) {
+        this.username = user_name;
+    }
+
+    set password(pass_word) {
+        this.password = pass_word;
     }
 
     /**

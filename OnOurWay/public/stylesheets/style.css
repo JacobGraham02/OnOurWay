@@ -1,8 +1,3 @@
-#google-maps-gui {
-  border: 2px dashed green;
-  height: 80%;
-  width: 80%;
-}
 :root {
   --primary-color: #32a431;
   --primary-light-color: #6ad660;
@@ -136,4 +131,7 @@
 }
 .margin-left-128 {
   margin-left: 128px;
+}
+.easteregg{
+  background-image: url('/images/fractal4.jpg');
 }

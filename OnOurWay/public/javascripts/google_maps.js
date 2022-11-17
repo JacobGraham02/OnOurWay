@@ -6,8 +6,18 @@ const postal_code_text_field = document.querySelector("#postal_code_text_field")
 const locality_text_field = document.querySelector('#locality_text_field');
 const country_text_field = document.querySelector('#country_text_field');
 
+const address_2_text_field = document.querySelector("#address_2_text_field");
+const postal_2_code_text_field = document.querySelector("#postal_code_2_text_field");
+const locality_2_text_field = document.querySelector('#locality_2_text_field');
+const country_2_text_field = document.querySelector('#country_2_text_field');
+
+const form_submit_button = document.querySelector('#submit_form_button');
+
+form_submit_button.addEventListener('click', (e) => {
+    e.preventDefault;
+});
+
 let map;
-let autocomplete;
 let geocoder;
 const list_of_markers = [];
 const list_of_addresses = [];
@@ -15,20 +25,32 @@ let directionsService;
 let directionsRenderer;
 
 function initMap() {
+    let address1 = "";
+    let address2 = "";
     map = new google.maps.Map(google_maps_container, {
         center: { lat: -34.397, lng: 131.644 },
         zoom: 8,
     });
     geocoder = new google.maps.Geocoder();
     new google.maps.places.Autocomplete(address_text_field);
-    autocomplete = new google.maps.places.Autocomplete(address_text_field, {
+    const auto_complete_1 = new google.maps.places.Autocomplete(address_text_field, {
         componentRestrictions: { country: ["us", "ca"]},
         fields: ["address_components", "geometry"],
         types: ["address"],
     });
-    address_text_field.focus();
-    autocomplete.addListener("place_changed", fillInAddress);
-}
+    auto_complete_1.addListener("place_changed", function() {
+        address1 = calculateAddress(auto_complete_1);
+        fillInAddressFieldsAddress1(address1);
+    });
+    const auto_complete_2 = new google.maps.places.Autocomplete(address_2_text_field, {
+        componentRestrictions: { country: ["us", "ca"]},
+        fields: ["address_components", "geometry"],
+        types: ["address"],
+    });
+    auto_complete_2.addListener("place_changed", function() {
+        address2 = calculateAddress(auto_complete_2);
+        fillInAddressFieldsAddress2(address2);
+})};
 
 function placeRouteBetweenTwoMarkers() {
     directionsService = new google.maps.DirectionsService();
@@ -64,9 +86,22 @@ function createMapMarker(address) {
     });
 }
 
-function fillInAddress() {
-    const place = autocomplete.getPlace();
-    let address1 = "";
+function fillInAddressFieldsAddress1(address) {
+    address_text_field.value = address.street_address;
+    postal_code_text_field.value = address.postal_code;
+    locality_text_field.value = address.locality;
+    country_text_field.value = address.country;
+}
+function fillInAddressFieldsAddress2(address) {
+    address_2_text_field.value = address.street_address;
+    postal_2_code_text_field.value = address.postal_code;
+    locality_2_text_field.value = address.locality;
+    country_2_text_field.value = address.country;
+}
+
+function calculateAddress(auto_complete_text_field) {
+    const place = auto_complete_text_field.getPlace();
+    let street_address = "";
     let postalcode = "";
     let country = "";
     let locality = "";
@@ -75,11 +110,11 @@ function fillInAddress() {
         console.log(component.long_name + ' ' + component.types[0]);
         switch (component.types[0]) {
             case "street_number": {
-                address1 = `${component.long_name} `;
+                street_address = `${component.long_name} `;
                 break;
             }
             case "route": {
-                address1 += component.long_name;
+                street_address += component.long_name;
                 break;
             }
             case "locality": {
@@ -96,11 +131,7 @@ function fillInAddress() {
             }
         }
     }
-    const address = `${address1}, ${locality}, ${country}, ${postalcode}`;
-    address_text_field.value = address1;
-    country_text_field.value =  country;
-    locality_text_field.value = locality;
-    postal_code_text_field.value = postalcode;
+    const address = `${street_address}, ${locality}, ${country}, ${postalcode}`;
 
     list_of_addresses.push(address);
 
@@ -108,6 +139,13 @@ function fillInAddress() {
       placeRouteBetweenTwoMarkers();
     } 
     createMapMarker(address);
+
+    return address_obj = {
+        street_address: street_address,
+        locality: locality,
+        country: country,
+        postal_code: postalcode,
+    };
 }
 
 window.initMap = initMap;

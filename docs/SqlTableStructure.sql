@@ -2,13 +2,15 @@
 
 -- DROP DATABASE onourway;
 -- CREATE DATABASE onourway;
--- USE onourway;
-
--- USE OnOurWay;
+USE OnOurWay;
 -- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
+DROP TABLE IF EXISTS carpool, carpool_passenger;
 CREATE TABLE Customer (
-	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
-	first_name varchar(100) NOT NULL,
+    id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
+    username varchar(25) NOT NULL UNIQUE,
+    password varchar(255) NOT NULL UNIQUE,
+    salt varchar(255) NOT NULL UNIQUE,
+    first_name varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
     credit_card_number varchar(20) NOT NULL UNIQUE,
     credit_card_cvc char(3) NOT NULL,
@@ -17,6 +19,9 @@ CREATE TABLE Customer (
     phone_number varchar(100) NOT NULL UNIQUE,
     email varchar(100) NOT NULL UNIQUE
 );
+
+INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
+
 ALTER TABLE Customer ADD path_to_image varchar(255);
 
 CREATE TABLE Passenger (
@@ -47,7 +52,8 @@ CREATE TABLE Ticket (
 
 CREATE TABLE Carpool (
 	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
-    address varchar(100) NOT NULL,
+    starting_address varchar(100),
+    ending_address varchar(100),
     maximum_passengers int NOT NULL CONSTRAINT max_passengers_nine CHECK (maximum_passengers <= 9)
 );
 
