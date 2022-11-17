@@ -1,8 +1,12 @@
 extends layout
 
 block content
-
+    
     h1.page-title.margin-left-32 Login page
+    -if (success_register_message !== undefined) {
+        p.desciption= success_register_message
+    -}
+    
     form.form-default.margin-left-64(action='/login' method='post')
         label.form-label(for='username') E-mail address or mobile phone number:
         input#username.form-input(type='text' name='username')
@@ -10,5 +14,3 @@ block content
         input#password.form-input(type='password' name='password')
         button.button-main.button-login-align(action='submit') Login
         .margin-left-64
-        p Not registered?
-        button.button-secondary(action='submit') Sign-up

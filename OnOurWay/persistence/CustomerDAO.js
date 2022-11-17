@@ -21,6 +21,7 @@ const getAllFromCustomer = function() {
 const getSpecificCustomer= function(where) {
     const where_clause = concatenateSqlQueryStringForWhereClause(where);
     let query_string = `SELECT * FROM CUSTOMER WHERE ${where_clause} LIMIT 1000`;
+    console.log(query_string);
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
             if (error) {
@@ -116,36 +117,3 @@ exports.getSpecificCustomer = getSpecificCustomer;
 exports.addCustomer = addCustomer;
 exports.updateCustomer = updateCustomer;
 exports.deleteCustomer = deleteCustomer;
-
-/*
-const customer = {
-    first_name: "Jacob",
-    last_name: "Graham",
-    credit_card_number: 1111,
-    credit_card_cvc: 111,
-    credit_card_effective_date: '2022-10-28',
-    credit_card_expiry_date: '2022-10-28',
-    phone_number: 7777,
-    email: "test5@gmail.com"
-};
-const query_info = {
-    table_name: "Customer",
-    total_columns: 2,
-    column_names: [
-        'first_name',
-        'last_name'
-    ],
-    column_values: [
-        'SecondFirstName',
-        'ThirdFirstName'
-    ],
-    where_clause: [
-        'Customer.first_name = "SecondFirstName"'
-    ],
-};
-*/
-//INSERT INTO Customer (first_name, last_name, credit_card_number, credit_card_cvc, credit_card_effective_date, credit_card_expiry_date, phone_number, email)
-// getAllFromCustomer().then((results) => {console.log(results)});
-//addCustomer(customer).then((results) => console.log(results));
-// getSpecificCustomer('id <= 1000').then((results) => console.log(results));
-//deleteCustomer(query_info.where_clause).then((results) => console.log(results));
