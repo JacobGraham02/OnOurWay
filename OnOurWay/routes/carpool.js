@@ -11,4 +11,8 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/detailed_route', function(request, response, next) {
+  response.render('carpool/detailed_routes', {title: 'Detailed routes page'});
+});
+
 module.exports = router;

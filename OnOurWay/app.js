@@ -123,8 +123,6 @@ app.post('/login', passport.authenticate('local', {
 
 app.post('/register', userExists, (request, response, next) => {
   response.redirect('login');
-  console.log(request.body.username);
-  console.log(request.body.password);
 });
 function userExists(request, response, next) {
   const failed_register_message = "A user with this account already exists. Please try again using another set of credentials";

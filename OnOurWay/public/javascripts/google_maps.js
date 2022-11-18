@@ -13,6 +13,11 @@ const country_2_text_field = document.querySelector('#country_2_text_field');
 
 const form_submit_button = document.querySelector('#submit_form_button');
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const carpool_start_address = urlParams.get('starting_address');
+const carpool_ending_address = urlParams.get('ending_address');
+
 form_submit_button.addEventListener('click', (e) => {
     e.preventDefault;
 });
@@ -31,10 +36,17 @@ function initMap() {
         center: { lat: -34.397, lng: 131.644 },
         zoom: 8,
     });
+
     geocoder = new google.maps.Geocoder();
     new google.maps.places.Autocomplete(address_text_field);
+    new google.maps.places.Autocomplete(address_2_text_field);
     const auto_complete_1 = new google.maps.places.Autocomplete(address_text_field, {
-        componentRestrictions: { country: ["us", "ca"]},
+        componentRestrictions: { country: ["ca"]},
+        fields: ["address_components", "geometry"],
+        types: ["address"],
+    });
+    const auto_complete_2 = new google.maps.places.Autocomplete(address_2_text_field, {
+        componentRestrictions: { country: ["ca"]},
         fields: ["address_components", "geometry"],
         types: ["address"],
     });
@@ -42,15 +54,16 @@ function initMap() {
         address1 = calculateAddress(auto_complete_1);
         fillInAddressFieldsAddress1(address1);
     });
-    const auto_complete_2 = new google.maps.places.Autocomplete(address_2_text_field, {
-        componentRestrictions: { country: ["us", "ca"]},
-        fields: ["address_components", "geometry"],
-        types: ["address"],
-    });
+
     auto_complete_2.addListener("place_changed", function() {
         address2 = calculateAddress(auto_complete_2);
         fillInAddressFieldsAddress2(address2);
-})};
+    });
+    if (carpool_start_address && carpool_ending_address !== undefined) {
+        auto_complete_1.value = "14 Charles Court, Barrie, Canada L4N 6S8";
+        auto_complete_2.value = "carpool_ending_address";
+    }
+};
 
 function placeRouteBetweenTwoMarkers() {
     directionsService = new google.maps.DirectionsService();
