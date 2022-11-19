@@ -13,11 +13,6 @@ const country_2_text_field = document.querySelector('#country_2_text_field');
 
 const form_submit_button = document.querySelector('#submit_form_button');
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const carpool_start_address = urlParams.get('starting_address');
-const carpool_ending_address = urlParams.get('ending_address');
-
 form_submit_button.addEventListener('click', (e) => {
     e.preventDefault;
 });
@@ -59,10 +54,6 @@ function initMap() {
         address2 = calculateAddress(auto_complete_2);
         fillInAddressFieldsAddress2(address2);
     });
-    if (carpool_start_address && carpool_ending_address !== undefined) {
-        auto_complete_1.value = "14 Charles Court, Barrie, Canada L4N 6S8";
-        auto_complete_2.value = "carpool_ending_address";
-    }
 };
 
 function placeRouteBetweenTwoMarkers() {

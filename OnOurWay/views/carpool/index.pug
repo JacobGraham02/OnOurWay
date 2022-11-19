@@ -1,6 +1,5 @@
 ul
   -for (let i = 0; i < carpool_locations.length; i++) {
-    li
-      a(href=`/carpool/detailed_route?id=${carpool_locations[i].id}&starting_address=${carpool_locations[i].starting_address}&ending_address=${carpool_locations[i].ending_address}`) Test
-    //- li= "Carpool starting from "  + carpool_locations[i].starting_address + " and ending at " + carpool_locations[i].ending_address 
+    li#carpool_list_item
+      a(href=`/carpool/detailed_route?id=${carpool_locations[i].id}`)= "Carpool starting address: " + carpool_locations[i].starting_address + " Carpool ending address: " + carpool_locations[i].ending_address
   -} 

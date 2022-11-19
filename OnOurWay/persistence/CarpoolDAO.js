@@ -32,13 +32,12 @@ const getSpecificCarpool= function(where) {
     });
 };
 
-const addCarpool = function(customer) {
-    let query_string = `INSERT INTO CUSTOMER (first_name, last_name, credit_card_number, credit_card_cvc, credit_card_effective_date, credit_card_expiry_date, phone_number, 
-        email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+const addCarpool = function(carpool) {
+    console.log("add carpool is run");
+    let query_string = `INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES (?, ?, ?)`;
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
-            connection.query(query_string, [customer.first_name, customer.last_name, customer.credit_card_number, customer.credit_card_cvc,
-                customer.credit_card_effective_date, customer.credit_card_expiry_date, customer.phone_number, customer.email], function(error, results) {
+            connection.query(query_string, [carpool.start_address, carpool.end_address, carpool.max_passengers], function(error, results) {
                 if (error) {
                     reject(error);
                 }
@@ -89,9 +88,6 @@ function concatenateSqlQueryStringForWhereClause(column_names) {
     }
     for (let i = 0; i < column_names.length; i++) {
         query_string += column_names[i];
-        if (i < column_names.length-1) {
-            query_string += ' AND ';
-        }
     }
     return query_string;
 };

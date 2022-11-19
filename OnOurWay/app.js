@@ -11,9 +11,9 @@ const passport = require('passport');
 const crypto = require('crypto');
 const LocalStrategy = require('passport-local').Strategy;
 const customerDAO = require('./persistence/CustomerDAO');
+const carpoolDAO = require('./persistence/CarpoolDAO');
 const encryptAndValidatePassword = require('./modules/EncryptionAndValidation');
 
-console.log(process.env.database_host);
 var driverRouter = require('./routes/driver');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -57,7 +57,7 @@ app.use(session({
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
@@ -124,6 +124,7 @@ app.post('/login', passport.authenticate('local', {
 app.post('/register', userExists, (request, response, next) => {
   response.redirect('login');
 });
+
 function userExists(request, response, next) {
   const failed_register_message = "A user with this account already exists. Please try again using another set of credentials";
   const success_register_message = "You have successfully registered an account. Please log in using your credentials";
@@ -136,45 +137,30 @@ function userExists(request, response, next) {
     }
   });
 }
-/*
-app.post('/register',userExists,(req,res,next)=>{
-    console.log("Inside post");
-    console.log(req.body.pw);
-    const saltHash=genPassword(req.body.pw);
-    console.log(saltHash);
-    const salt=saltHash.salt;
-    const hash=saltHash.hash;
+app.post('/create_carpool_route', (request, response) => {
+  const starting_street_name = request.body.address_1;
+  const starting_postal_code = request.body.postal_code_1;
+  const starting_locality = request.body.locality_1;
+  const starting_country = request.body.country_1;
 
-    connection.query('Insert into users(username,hash,salt,isAdmin) values(?,?,?,0) ', [req.body.uname,hash,salt], function(error, results, fields) {
-        if (error) 
-            {
-                console.log("Error");
-            }
-        else
-        {
-            console.log("Successfully Entered");
-        }
-       
-    });
+  const ending_street_name = request.body.address_2;
+  const ending_postal_code = request.body.postal_code_2;
+  const ending_locality = request.body.locality_2;
+  const ending_country = request.body.country_2;
 
-    res.redirect('/login');
+  const starting_address = `${starting_street_name}, ${starting_locality}, ${starting_country}, ${starting_postal_code}`;
+  const ending_address = `${ending_street_name}, ${ending_locality}, ${ending_country}, ${ending_postal_code}`;
+
+  const maximum_passengers = request.body.maximum_passengers;
+
+  const carpool_obj = {
+    start_address: starting_address,
+    end_address: ending_address,
+    max_passengers: maximum_passengers,
+  };
+  carpoolDAO.addCarpool(carpool_obj);
 });
-connection.query('Select * from users where username=? ', [req.body.uname], function(error, results, fields) {
-        if (error) 
-            {
-                console.log("Error");
-            }
-       else if(results.length>0)
-         {
-            res.redirect('/userAlreadyExists')
-        }
-        else
-        {
-            next();
-        }
-       
-    });
-*/
+
 app.get('/login-success', (request, response, next) => {
   response.render('customer/index');
 });
