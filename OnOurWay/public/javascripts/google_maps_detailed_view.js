@@ -7,6 +7,7 @@ const carpool_address_container = document.querySelector("#carpool_address_conta
 const carpool_li_starting_address = document.querySelector("#carpool_list_item_start_address");
 const carpool_li_ending_address = document.querySelector("#carpool_list_item_end_address");
 const carpool_li_maximum_passengers = document.querySelector("#carpool_list_item_maximum_passengers");
+const google_maps_directions_sidebar = document.querySelector("#directions_sidebar");
 const list_of_addresses = [];
 
 function initMap() {
@@ -42,6 +43,7 @@ function placeRouteBetweenTwoMarkers() {
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer(); 
     directionsRenderer.setMap(map);
+    directionsRenderer.setPanel(google_maps_directions_sidebar);
     const start_location = list_of_addresses[0];
     const end_location = list_of_addresses[1];
 
