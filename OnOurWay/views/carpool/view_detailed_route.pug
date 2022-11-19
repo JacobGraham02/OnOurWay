@@ -10,5 +10,8 @@ main
         li#carpool_list_item_end_address= "Carpool ending address: " + carpool_information.ending_address 
         li#carpool_list_item_maximum_passengers= "Maximum passengers allowed in carpool: " + carpool_information.maximum_passengers
   div#directions_sidebar
+
+  form(action='/create-checkout-session', method='POST')
+    button#submit_form_button(type='submit') Click me to submit
   script(src='/javascripts/google_maps_detailed_view.js')
   script(async='' defer='' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAKz3oZ9x--Z_1py4gMmwS0ETUG112nXJY&libraries=places&callback=initMap&v=weekly')

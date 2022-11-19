@@ -13,6 +13,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const customerDAO = require('./persistence/CustomerDAO');
 const carpoolDAO = require('./persistence/CarpoolDAO');
 const encryptAndValidatePassword = require('./modules/EncryptionAndValidation');
+const DOMAIN = 'http://localhost:3005';
 
 var driverRouter = require('./routes/driver');
 var indexRouter = require('./routes/index');
@@ -167,7 +168,34 @@ app.get('/login-success', (request, response, next) => {
 
 app.get('/login-failure', (request, response, next) => {
   response.render('login');
-})
+});
+/*
+Stripe Visa test card
+Number: 4242 4242 4242 4242
+CVC: Any 3 digits (123)
+Date: Any future date (11/24)
+Postal code: L2N L2N
+*/
+app.post('/create-checkout-session', async (request, response) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price_data: {
+          currency: 'cad',
+          product_data: {
+            name: 'T-shirt',
+          },
+          unit_amount: 100,
+        },
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: 'http://localhost:3005/',
+    cancel_url: 'http://localhost:3005/',
+  });
+  response.redirect(303, session.url);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
