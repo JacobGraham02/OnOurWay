@@ -3,6 +3,7 @@
 -- DROP DATABASE onourway;
 -- CREATE DATABASE onourway;
 USE OnOurWay;
+SELECT * FROM Customer;
 -- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
 DROP TABLE IF EXISTS carpool, carpool_passenger;
 CREATE TABLE Customer (
@@ -21,6 +22,10 @@ CREATE TABLE Customer (
 );
 
 INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
+
+SELECT * FROM Carpool;
+
+DELETE FROM Carpool WHERE id < 1000;
 
 ALTER TABLE Customer ADD path_to_image varchar(255);
 
