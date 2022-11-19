@@ -41,19 +41,11 @@ app.set('view engine', 'pug');
 app.use(session({
 	key: process.env.express_mysql_session_cookie_name,
 	secret: process.env.express_mysql_session_cookie_secret,
-	// store: new MySQLStore({
-  //       host:process.env.database_host,
-  //       user:process.env.database_user,
-  //       port:process.env.database_port,
-  //       password:process.env.database_password,
-  //       database:process.env.database_name,
-  //       multipleStatements: true,
-  //   }),
-	  resave: false,
-    saveUninitialized: false,
-    cookie:{
-        maxAge:1000*60*60*24,
-    }
+	resave: false,
+  saveUninitialized: false,
+  cookie:{
+    maxAge:1000*60*60*24,
+  }
 }));
 
 app.use(logger('dev'));
