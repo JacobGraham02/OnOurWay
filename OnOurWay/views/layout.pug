@@ -15,9 +15,20 @@ ul.navbar
     a this damn
   li.navbar-item
     a class :)
-  li.navbar-item.navbar-item-right-align
-    a(href='/login') Log in to your account
-  li.navbar-item.navbar-item-right-align
-    a(href='/register') Register your account
+
+  if user 
+    li.navbar-item.navbar-item-right-align 
+      a(href='/') View your list of carpools
+    li.navbar-item.navbar-item-right-align
+      a(href='/register') Register an account
+    li.navbar-item.navbar-item-right-align 
+      a(href='/logout') Log out of your account
+    li.navbar-item.navbar-item-right-align 
+      a(href='/account') View and edit your account details
+  else 
+    li.navbar-item.navbar-item-right-align
+      a(href='/login') Log in to your account
+    li.navbar-item.navbar-item-right-align
+      a(href='/register') Register an account
 
 block content
