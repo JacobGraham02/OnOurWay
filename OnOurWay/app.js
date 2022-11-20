@@ -11,15 +11,14 @@ const passport = require('passport');
 const crypto = require('crypto');
 const LocalStrategy = require('passport-local').Strategy;
 const customerDAO = require('./persistence/CustomerDAO');
+const carpoolDAO = require('./persistence/CarpoolDAO');
 const encryptAndValidatePassword = require('./modules/EncryptionAndValidation');
+const DOMAIN = 'http://localhost:3005';
 
-console.log(process.env.database_host);
 var driverRouter = require('./routes/driver');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var stripeRouter = require('./routes/stripe');
-var customerRouter = require('./routes/customer');
 var carpoolRouter = require('./routes/carpool');
+var customerRouter = require('./routes/customer');
 var database_manager = require('./persistence/DatabaseConnectionManager');
 var MySQLStore = require('express-mysql-session')(session);
 
@@ -40,35 +39,25 @@ app.set('view engine', 'pug');
 app.use(session({
 	key: process.env.express_mysql_session_cookie_name,
 	secret: process.env.express_mysql_session_cookie_secret,
-	// store: new MySQLStore({
-  //       host:process.env.database_host,
-  //       user:process.env.database_user,
-  //       port:process.env.database_port,
-  //       password:process.env.database_password,
-  //       database:process.env.database_name,
-  //       multipleStatements: true,
-  //   }),
-	  resave: false,
-    saveUninitialized: false,
-    cookie:{
-        maxAge:1000*60*60*24,
-    }
+	resave: false,
+  saveUninitialized: false,
+  cookie:{
+    maxAge:1000*60*60*24,
+  }
 }));
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/stripe', stripeRouter);
 app.use('/driver', driverRouter);
-app.use('/customer', customerRouter);
 app.use('/carpool', carpoolRouter);
+app.use('/customer', customerRouter);
 
 const usernameAndPasswordFormFields = {
   username_field: 'username',
@@ -123,9 +112,8 @@ app.post('/login', passport.authenticate('local', {
 
 app.post('/register', userExists, (request, response, next) => {
   response.redirect('login');
-  console.log(request.body.username);
-  console.log(request.body.password);
 });
+
 function userExists(request, response, next) {
   const failed_register_message = "A user with this account already exists. Please try again using another set of credentials";
   const success_register_message = "You have successfully registered an account. Please log in using your credentials";
@@ -138,52 +126,64 @@ function userExists(request, response, next) {
     }
   });
 }
-/*
-app.post('/register',userExists,(req,res,next)=>{
-    console.log("Inside post");
-    console.log(req.body.pw);
-    const saltHash=genPassword(req.body.pw);
-    console.log(saltHash);
-    const salt=saltHash.salt;
-    const hash=saltHash.hash;
+app.post('/create_carpool_route', (request, response) => {
+  const starting_street_name = request.body.address_1;
+  const starting_postal_code = request.body.postal_code_1;
+  const starting_locality = request.body.locality_1;
+  const starting_country = request.body.country_1;
 
-    connection.query('Insert into users(username,hash,salt,isAdmin) values(?,?,?,0) ', [req.body.uname,hash,salt], function(error, results, fields) {
-        if (error) 
-            {
-                console.log("Error");
-            }
-        else
-        {
-            console.log("Successfully Entered");
-        }
-       
-    });
+  const ending_street_name = request.body.address_2;
+  const ending_postal_code = request.body.postal_code_2;
+  const ending_locality = request.body.locality_2;
+  const ending_country = request.body.country_2;
 
-    res.redirect('/login');
+  const starting_address = `${starting_street_name}, ${starting_locality}, ${starting_country}, ${starting_postal_code}`;
+  const ending_address = `${ending_street_name}, ${ending_locality}, ${ending_country}, ${ending_postal_code}`;
+
+  const maximum_passengers = request.body.maximum_passengers;
+
+  const carpool_obj = {
+    start_address: starting_address,
+    end_address: ending_address,
+    max_passengers: maximum_passengers,
+  };
+  carpoolDAO.addCarpool(carpool_obj);
 });
-connection.query('Select * from users where username=? ', [req.body.uname], function(error, results, fields) {
-        if (error) 
-            {
-                console.log("Error");
-            }
-       else if(results.length>0)
-         {
-            res.redirect('/userAlreadyExists')
-        }
-        else
-        {
-            next();
-        }
-       
-    });
-*/
+
 app.get('/login-success', (request, response, next) => {
-  response.render('customer/index');
+  response.render('customer/index', {user: request.user});
 });
 
 app.get('/login-failure', (request, response, next) => {
-  response.render('login');
-})
+  response.render('login', {invalid_login_message: 'Invalid login credentials. Please try again with another set of credentials'});
+});
+/*
+Stripe Visa test card
+Number: 4242 4242 4242 4242
+CVC: Any 3 digits (123)
+Date: Any future date (11/24)
+Postal code: L2N L2N
+*/
+app.post('/create-checkout-session', async (request, response) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price_data: {
+          currency: 'cad',
+          product_data: {
+            name: 'T-shirt',
+          },
+          unit_amount: 100,
+        },
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: 'http://localhost:3005/',
+    cancel_url: 'http://localhost:3005/',
+  });
+  response.redirect(303, session.url);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

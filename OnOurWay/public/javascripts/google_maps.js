@@ -31,10 +31,17 @@ function initMap() {
         center: { lat: -34.397, lng: 131.644 },
         zoom: 8,
     });
+
     geocoder = new google.maps.Geocoder();
     new google.maps.places.Autocomplete(address_text_field);
+    new google.maps.places.Autocomplete(address_2_text_field);
     const auto_complete_1 = new google.maps.places.Autocomplete(address_text_field, {
-        componentRestrictions: { country: ["us", "ca"]},
+        componentRestrictions: { country: ["ca"]},
+        fields: ["address_components", "geometry"],
+        types: ["address"],
+    });
+    const auto_complete_2 = new google.maps.places.Autocomplete(address_2_text_field, {
+        componentRestrictions: { country: ["ca"]},
         fields: ["address_components", "geometry"],
         types: ["address"],
     });
@@ -42,15 +49,12 @@ function initMap() {
         address1 = calculateAddress(auto_complete_1);
         fillInAddressFieldsAddress1(address1);
     });
-    const auto_complete_2 = new google.maps.places.Autocomplete(address_2_text_field, {
-        componentRestrictions: { country: ["us", "ca"]},
-        fields: ["address_components", "geometry"],
-        types: ["address"],
-    });
+
     auto_complete_2.addListener("place_changed", function() {
         address2 = calculateAddress(auto_complete_2);
         fillInAddressFieldsAddress2(address2);
-})};
+    });
+};
 
 function placeRouteBetweenTwoMarkers() {
     directionsService = new google.maps.DirectionsService();
