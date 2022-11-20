@@ -18,6 +18,7 @@ const DOMAIN = 'http://localhost:3005';
 var driverRouter = require('./routes/driver');
 var indexRouter = require('./routes/index');
 var carpoolRouter = require('./routes/carpool');
+var customerRouter = require('./routes/customer');
 var database_manager = require('./persistence/DatabaseConnectionManager');
 var MySQLStore = require('express-mysql-session')(session);
 
@@ -56,6 +57,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/driver', driverRouter);
 app.use('/carpool', carpoolRouter);
+app.use('/customer', customerRouter);
 
 const usernameAndPasswordFormFields = {
   username_field: 'username',
@@ -149,11 +151,11 @@ app.post('/create_carpool_route', (request, response) => {
 });
 
 app.get('/login-success', (request, response, next) => {
-  response.render('customer/index');
+  response.render('customer/index', {user: request.user});
 });
 
 app.get('/login-failure', (request, response, next) => {
-  response.render('login');
+  response.render('login', {invalid_login_message: 'Invalid login credentials. Please try again with another set of credentials'});
 });
 /*
 Stripe Visa test card

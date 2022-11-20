@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/login', function(request, response, next) {
   if (request.user) {
-    response.redirect('/');
+    response.render('/');
   } else {
     response.render('login', {title: "Login page", success_register_message: request.query.success_register_message, user:request.user});
   }
