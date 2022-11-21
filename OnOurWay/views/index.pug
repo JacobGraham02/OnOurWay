@@ -1,4 +1,13 @@
-extends layout
-
-block content
-    
+html
+  head
+    title= title
+    script(src='/stylesheets/wei.js' defer)
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='/stylesheets/google_maps_style.css' type='text/css' rel='stylesheet')
+  body
+  .background-homepage
+    h1.homepage On Our Way
+    p.homepage find a ride to your next destination today
+    .container.homepage
+        a.button-main(href='login') Log in to your account
+        a.button-main(href='register') Register your account
