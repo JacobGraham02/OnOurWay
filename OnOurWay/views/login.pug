@@ -3,8 +3,8 @@ extends layout
 block content
     
     h1.page-title.margin-left-32 Login page
-    -if (success_register_message !== undefined) {
-        p.desciption= success_register_message
+    -if (message !== undefined) {
+        p.desciption= message
     -}
     
     form.form-default.margin-left-64(action='/login' method='post')

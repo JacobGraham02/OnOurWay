@@ -71,16 +71,16 @@ password: test1234
 email: test@gmail.com
 */
 const verifyCallback = (username, password, done) => {
-  customerDAO.getSpecificCustomer(`first_name='${username}'`).then((results) => {
+  customerDAO.getSpecificCustomer(`email='${username}'`).then((results) => {
     let customer_data = results[0];
     if (results.length === 0) {
       return done(null, false);
     } 
-    const is_valid_user = encryptAndValidatePassword.validatePassword(password, customer_data['password'], customer_data['salt']);
+    const is_valid_user = encryptAndValidatePassword.validatePassword(password, customer_data.password, customer_data.salt);
     const user = {
-      id: customer_data['id'],
-      username: customer_data['username'],
-      password: customer_data['password'],
+      id: customer_data.id,
+      username: customer_data.username,
+      password: customer_data.password,
     };
     if (is_valid_user) {
       return done(null, user);
@@ -110,22 +110,59 @@ app.post('/login', passport.authenticate('local', {
   failureRedirect: '/login-failure'
 }));
 
-app.post('/register', userExists, (request, response, next) => {
-  response.redirect('login');
+app.post('/register', (request, response, next) => {
+  const failed_register_message = "A user with this account already exists. Please try again using another set of credentials";
+  const success_register_message = "You have successfully registered an account. Please log in using your credentials";
+  const customer_data = request.body;
+  const customer_password_obj = encryptAndValidatePassword.encryptPassword(request.body.password);
+  const customer_password = customer_password_obj.password;
+  const customer_password_salt = customer_password_obj.salt;
+  const customer_information_obj = {
+    username: customer_data.username,
+    password: customer_password,
+    salt: customer_password_salt,
+    first_name: customer_data.first_name,
+    last_name: customer_data.last_name,
+    credit_card_number: customer_data.credit_card_number,
+    credit_card_cvc: customer_data.credit_card_cvc,
+    credit_card_effective_date: customer_data.credit_card_effective_date,
+    credit_card_expiry_date: customer_data.credit_card_expiry_date,
+    phone_number: customer_data.phone_number,
+    email: customer_data.email,
+  };
+  if (!userExists(request)) {
+    customerDAO.addCustomer(customer_information_obj);
+    response.redirect('login?message=' + encodeURIComponent(success_register_message));
+  } else {
+    response.redirect('register?message=' + encodeURIComponent(failed_register_message));
+  }
 });
 
 function userExists(request, response, next) {
-  const failed_register_message = "A user with this account already exists. Please try again using another set of credentials";
-  const success_register_message = "You have successfully registered an account. Please log in using your credentials";
-  const customer = customerDAO.getSpecificCustomer(`email = '${request.body.username}'`);
+  const customer = customerDAO.getSpecificCustomer(`username = '${request.body.username}'`);
   customer.then((customer) => {
     if (customer.length >= 1) {
-      response.redirect('register?failed_register_message=' + encodeURIComponent(failed_register_message));
+      return true;
     } else {
-      response.redirect('login?success_register_message=' + encodeURIComponent(success_register_message));
+      return false;
     }
   });
 }
+app.post('/update-account-info', (request, response) => {
+  const account_email = request.body.email;
+  const [...object_keys] = Object.keys(request.body);
+  const [...object_values] = Object.values(request.body);
+  const total_object_columns = object_keys.length;
+  const customer_obj = {
+    column_names: object_keys,
+    column_values: object_values,
+    total_columns: total_object_columns,
+    where_clause: `email = "${account_email}"`,
+  };
+  customerDAO.updateCustomer(customer_obj);
+  response.render('customer/index', {message: 'You have successfully updated your account information', user: request.user});
+});
+
 app.post('/create_carpool_route', (request, response) => {
   const starting_street_name = request.body.address_1;
   const starting_postal_code = request.body.postal_code_1;
@@ -151,11 +188,11 @@ app.post('/create_carpool_route', (request, response) => {
 });
 
 app.get('/login-success', (request, response, next) => {
-  response.render('customer/index', {user: request.user});
+  response.render('customer/index', {message: 'You have successfully logged in', user: request.user});
 });
 
 app.get('/login-failure', (request, response, next) => {
-  response.render('login', {invalid_login_message: 'Invalid login credentials. Please try again with another set of credentials'});
+  response.render('login', {message: 'Invalid login credentials. Please try again with another set of credentials'});
 });
 /*
 Stripe Visa test card
