@@ -92,6 +92,13 @@ body {
 .navbar-item {
   float: left;
 }
+.navbar-item.server-message{
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 .navbar-item a {
   display: block;
   text-align: center;
