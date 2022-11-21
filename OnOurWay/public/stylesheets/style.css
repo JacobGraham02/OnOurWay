@@ -23,6 +23,8 @@ body {
   width: 50%;
 }
 .button-main{
+  color: black;
+  text-decoration: none;
   background-color: var(--primary-color);
   border: 1px solid var(--primary-dark-color);
   padding: 10px 20px;
