@@ -21,6 +21,9 @@ CREATE TABLE Customer (
     email varchar(100) NOT NULL UNIQUE
 );
 
+UPDATE CUSTOMER SET username="TestUsername", first_name="Jacob", last_name="Graham", phone_number="(888) 888-8888", email="test@gmail.com", credit_card_number="255", credit_card_cvc="255", 
+credit_card_effective_date="2022-11-14", credit_card_expiry_date="2022-11-14" WHERE email = 'test@gmail.com';
+
 INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
 
 SELECT * FROM Carpool;
