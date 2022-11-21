@@ -92,6 +92,13 @@ body {
 .navbar-item {
   float: left;
 }
+.navbar-item.server-message{
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 .navbar-item a {
   display: block;
   text-align: center;
@@ -153,4 +160,24 @@ body {
 }
 .easteregg{
   background-image: url('/images/fractal4.jpg');
+}
+.homepage{
+  text-align: center;
+  padding: 25px;
+  opacity: 1;
+}
+.background-homepage{
+  background-image: url('/images/roadway.jpg'); /*https://www.pexels.com/photo/empty-blacktop-road-under-cloudy-sky-1125895/*/
+  background-size:cover;
+}
+
+.container{  
+  justify-content: center;
+  align-items: center ;
+  width:auto;
+  height:auto;
+  padding-top:100px;
+  margin:0 auto;
+  display:flex;
+  opacity: 1;
 }
