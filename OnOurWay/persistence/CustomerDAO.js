@@ -21,7 +21,6 @@ const getAllFromCustomer = function() {
 const getSpecificCustomer= function(where) {
     const where_clause = concatenateSqlQueryStringForWhereClause(where);
     let query_string = `SELECT * FROM CUSTOMER WHERE ${where_clause} LIMIT 1000`;
-    console.log(query_string);
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
             if (error) {
@@ -39,8 +38,7 @@ const getSpecificCustomer= function(where) {
 };
 
 const addCustomer = function(customer) {
-    let query_string = `INSERT INTO CUSTOMER (username, password, salt, first_name, last_name, credit_card_number, credit_card_cvc, credit_card_effective_date, credit_card_expiry_date, phone_number, 
-        email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    let query_string = `INSERT INTO CUSTOMER (username, password, salt, first_name, last_name, credit_card_number, credit_card_cvc, credit_card_effective_date, credit_card_expiry_date, phone_number, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
             connection.query(query_string, [customer.username, customer.password, customer.salt, customer.first_name, customer.last_name, customer.credit_card_number, 
@@ -104,7 +102,6 @@ function concatenateSqlQueryStringForUpdate(column_names, column_values, total_c
     let query_string = ``;
     for (let i = 0; i < total_columns; i++) {
         query_string += column_names[i] + '=' + '"' + column_values[i] + '"';
-        console.log()
         if (i < total_columns - 1) {
             query_string += ', ';
         }

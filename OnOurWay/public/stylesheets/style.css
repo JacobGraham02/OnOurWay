@@ -12,7 +12,7 @@ body {
   width: 100vw;
   height: 100vh;
 }
-#account_details_information, #account_payment_information {
+#account_details_fieldset, #account_payment_information_fieldset {
   display: flex;
   flex-direction: column;
   border: 2px dashed pink;
