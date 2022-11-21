@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    script(src='/stylesheets/wei.js' defer)
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='/stylesheets/google_maps_style.css' type='text/css' rel='stylesheet')
+  body
+    header
+      ul.navbar
+        if user
+          -const user_id = user.id;
+          li.navbar-item
+            a(href='/login-success')
+              img.navbar-logo(src='/images/onourway.png')
+          li.navbar-item= message            
+          li.navbar-item.navbar-item-right-align 
+              a(href='/logout') Log out of your account
+          li.navbar-item.navbar-item-right-align 
+            a(href='/carpool/') View your list of carpools
+          li.navbar-item.navbar-item-right-align 
+            a(href=`/customer/account-details?id=${user_id}`) Account details
+
+        else 
+          li.navbar-item 
+            a(href='/')
+              img.navbar-logo(src='/images/onourway.png')
+          li.navbar-item.navbar-item-right-align
+            a(href='login') Log in to your account
+          li.navbar-item.navbar-item-right-align
+            a(href='register') Register your account
+    main#layout_main
+      block content

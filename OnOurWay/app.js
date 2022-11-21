@@ -202,8 +202,7 @@ Postal code: L2N L2N
 */
 app.post('/create-checkout-session', async (request, response) => {
   const user = request.user;
-  console.log(user);
-  console.log(request.body);
+  const carpool_id = request.body.carpool_id;
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
@@ -218,8 +217,8 @@ app.post('/create-checkout-session', async (request, response) => {
       },
     ],
     mode: 'payment',
-    success_url: `http://localhost:3005/customer/carpool_list?user_id=${user.id}`,
-    cancel_url: 'http://localhost:3005/',
+    success_url: `http://localhost:3005/customer/carpool_list?user_id=${user.id}&carpool_id=${carpool_id}`,
+    cancel_url: `http://localhost:3005/customer/carpool_list`,
   });
   response.redirect(303, session.url);
 });

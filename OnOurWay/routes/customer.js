@@ -34,6 +34,7 @@ router.get('/carpool_list', function(request, response, next) {
   // customer_data.then((account_data) => {
   
   // }); 
+  response.render('customer/carpool_list', {user: request.user});
 });
 
 /* GET home page. */
