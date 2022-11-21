@@ -5,7 +5,7 @@
 USE OnOurWay;
 SELECT * FROM Customer;
 -- DROP TABLE IF EXISTS customer, passenger, vehicle, carpool_passenger, driver, driver_car, carpool, ticket;
-DROP TABLE IF EXISTS carpool, carpool_passenger;
+-- DROP TABLE IF EXISTS carpool, carpool_passenger;
 CREATE TABLE Customer (
     id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
     username varchar(25) NOT NULL UNIQUE,
@@ -25,10 +25,10 @@ UPDATE CUSTOMER SET username="TestUsername", first_name="Jacob", last_name="Grah
 credit_card_effective_date="2022-11-14", credit_card_expiry_date="2022-11-14" WHERE email = 'test@gmail.com';
 
 INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
-
+-- DELETE FROM Customer WHERE id < 1000;
 SELECT * FROM Carpool;
 
-DELETE FROM Carpool WHERE id < 1000;
+-- DELETE FROM Carpool WHERE id < 1000;
 
 ALTER TABLE Customer ADD path_to_image varchar(255);
 
@@ -75,11 +75,12 @@ CREATE TABLE Vehicle (
 );
 
 CREATE TABLE Carpool_Passenger (
-	id int NOT NULL PRIMARY KEY,
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     carpool_id int NOT NULL,
     FOREIGN KEY (id) REFERENCES Passenger (id),
     FOREIGN KEY (carpool_id) REFERENCES Carpool (id)
 );
+ALTER TABLE Carpool_Passenger MODIFY COLUMN id INT auto_increment;
 
 CREATE TABLE Driver_car (
 	id int NOT NULL PRIMARY KEY,
