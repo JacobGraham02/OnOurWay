@@ -4,6 +4,7 @@ html
     title= title
     script(src='/stylesheets/wei.js' defer)
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/get_query_parameters.js')
     link(href='/stylesheets/google_maps_style.css' type='text/css' rel='stylesheet')
   body
     header
@@ -28,6 +29,8 @@ html
             a(href='/logout') Log out of your account
           li.navbar-item.navbar-item-right-align 
             a(href=`/customer/account-details?id=${user_id}`) Account details 
+          li.navbar-item.navbar-item-right-align 
+            a(href='/carpool/') Create a carpool route
         else 
           li.navbar-item.navbar-item-right-align
             a(href='login') Log in to your account

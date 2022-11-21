@@ -81,6 +81,24 @@ const deleteCarpool = function(where) {
     });
 };
 
+// Select from both the Customer and Carpool table
+const addCustomerToCarpoolJunctionTable = function(user_id, carpool_id) {
+    const where_clause_string = concatenateSqlQueryStringForWhereClause(where);
+    let query_string = `INSERT INTO CarpoolPassenger (id, carpool_id) VALUES ()`
+
+    /*
+    insert into  trips_places_asc ( trip_id, place_id )
+    values (  (select trip_id from trips where trip_name = 'MyTrip'),
+              (select place_id from places where place_name = 'XYZ') );
+    CREATE TABLE Carpool_Passenger (
+	    id int NOT NULL PRIMARY KEY,
+        carpool_id int NOT NULL,
+        FOREIGN KEY (id) REFERENCES Passenger (id),
+        FOREIGN KEY (carpool_id) REFERENCES Carpool (id)
+    );
+    */
+}
+
 function concatenateSqlQueryStringForWhereClause(column_names) {
     let query_string = ``;
     if (column_names.length < 1) {

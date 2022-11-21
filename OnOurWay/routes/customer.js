@@ -21,6 +21,21 @@ router.get('/account-details', isLoggedIn, function(request, response, next) {
     });
 });
 
+router.get('/carpool_list', function(request, response, next) {
+  const request_user_id = request.query.user_id;
+  const query_where_clause = `id = ${request_user_id}`;
+  // const customer_data = customerDAO.getSpecificCustomer(query_where_clause);
+  // customer_data.then((account_data) => {
+  //   response.render('customer/carpool_list', {user: account_data});
+  // }); 
+  // const request_parameter_id = request.query.id;
+  // const query_where_clause = `id = ${request_parameter_id}`;
+  // const customer_data = customerDAO.getSpecificCustomer(query_where_clause);
+  // customer_data.then((account_data) => {
+  
+  // }); 
+});
+
 /* GET home page. */
 router.get('/', isLoggedIn, function(req, res, next) {
   const carpool_locations = carpoolDAO.getAllFromCarpool();
@@ -35,12 +50,12 @@ router.get('/detailed_route', isLoggedIn, function(request, response, next) {
   const carpool_result = carpoolDAO.getSpecificCarpool(query_where_clause);
   carpool_result.then((carpool) => {
     const carpool_information = carpool[0]; 
-    response.render('carpool/view_detailed_route', {title: 'Detailed route', carpool_information: carpool_information});
+    response.render('carpool/view_detailed_route', {title: 'Detailed route', carpool_information: carpool_information, user:request.user});
   });
 });
 
 router.get('/create_carpool_route', function(request, response, next) {
-  response.render('carpool/detailed_routes');
+  response.render('carpool/detailed_routes', {user: request.user});
 });
 
 module.exports = router;

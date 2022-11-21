@@ -13,6 +13,7 @@ block content
 
   form(action='/create-checkout-session', method='POST')
     label#buy_ticket_label Buy a ticket for this carpool
+    input(type="hidden" id="carpool_id_input" name="carpool_id" value= carpool_id)
     button#submit_form_button(type='submit') Click me to submit
   script(src='/javascripts/google_maps_detailed_view.js')
   script(async='' defer='' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAKz3oZ9x--Z_1py4gMmwS0ETUG112nXJY&libraries=places&callback=initMap&v=weekly')
