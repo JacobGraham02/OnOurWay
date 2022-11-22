@@ -4,4 +4,6 @@
     border: 2px solid var(--primary-color);
     height: 475%;
     width: 50%;
+    position:relative;
+    margin:auto;
 }

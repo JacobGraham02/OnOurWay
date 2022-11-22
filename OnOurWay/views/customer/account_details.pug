@@ -3,7 +3,7 @@ extends ../layout
 block content
     article#account_details_information.account-detail-article
         h1.container.homepage Account Details
-        form#account_details_form(action='/update-account-info', method='POST') 
+        form#account_details_form.account-detail-form(action='/update-account-info', method='POST') 
             fieldset#account_details_fieldset.account-detail-fieldset 
                 label#username(for='username') Username
                 input#username_text_field(type='text' name='username' required='' value=account_information.username)
@@ -32,4 +32,4 @@ block content
 
                 label#credit_card_expiry_date(for='credit_card_expiry_date') Credit card expiry date
                 input#credit_card_expiry_date_text_field(type='text' name='credit_card_expiry_date' required='' value=account_information.credit_card_expiry_date).account-details-cc-hide
-            button#submit_account_details_button.account-detail-fieldset(type='submit') Click me to save your changes (if any)
+            button#submit_account_details_button.button-main(type='submit') Click me to save your changes (if any)
