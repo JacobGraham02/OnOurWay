@@ -2,6 +2,7 @@ extends ../layout
 
 block content
     article#account_details_information.account-detail-article
+        h1.container.homepage Account Details
         form#account_details_form(action='/update-account-info', method='POST') 
             fieldset#account_details_fieldset.account-detail-fieldset 
                 label#username(for='username') Username

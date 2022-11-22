@@ -9,8 +9,6 @@ body {
   display: grid;
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
 }
 #account_details_fieldset, #account_payment_information_fieldset {
   display: flex;
@@ -82,7 +80,7 @@ body {
   padding: 0;
   background-color: var(--primary-light-color);
   overflow: hidden;
-  position: absolute;
+  position: relative;
   width: 100%;
   height: auto;
   top: 0;
@@ -201,7 +199,7 @@ body {
   text-shadow:none;
 }
 
-.account-detail-fieldset{
+.account-detail-fieldset{  
   width: 50%;
   display: inline-block;
   box-sizing: border-box;
