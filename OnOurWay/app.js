@@ -13,6 +13,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const customerDAO = require('./persistence/CustomerDAO');
 const carpoolDAO = require('./persistence/CarpoolDAO');
 const encryptAndValidatePassword = require('./modules/EncryptionAndValidation');
+const multer_upload_path = './public/images/customer_images'
+const multer = require('multer');
+const upload = multer({ dest: multer_upload_path })
 
 var driverRouter = require('./routes/driver');
 var indexRouter = require('./routes/index');
@@ -26,6 +29,7 @@ var app = express();
 const stripe_publishable_key = process.env.stripe_publishable_key;
 const stripe_secret_key = process.env.stripe_secret_key;
 const stripe = require('stripe')(stripe_secret_key);
+
 
 app.listen(3005, function() {
   console.log("This application is listening to port 3005");
@@ -109,10 +113,11 @@ app.post('/login', passport.authenticate('local', {
   failureRedirect: '/login-failure'
 }));
 
-app.post('/register', (request, response, next) => {
+app.post('/register', upload.single('avatar'), (request, response, next) => {
   const failed_register_message = "A user with this account already exists. Please try again using another set of credentials";
   const success_register_message = "You have successfully registered an account. Please log in using your credentials";
   const customer_data = request.body;
+  const customer_image = request.file;
   const customer_password_obj = encryptAndValidatePassword.encryptPassword(request.body.password);
   const customer_password = customer_password_obj.password;
   const customer_password_salt = customer_password_obj.salt;
@@ -128,17 +133,18 @@ app.post('/register', (request, response, next) => {
     credit_card_expiry_date: customer_data.credit_card_expiry_date,
     phone_number: customer_data.phone_number,
     email: customer_data.email,
+    image_path: customer_image.path,
   };
-  if (!userExists(request)) {
-    customerDAO.addCustomer(customer_information_obj);
-    response.redirect('login?message=' + encodeURIComponent(success_register_message));
+  if (!userExists(request.body.username)) {
+    //customerDAO.addCustomer(customer_information_obj);
+    //response.redirect('login?message=' + encodeURIComponent(success_register_message));
   } else {
-    response.redirect('register?message=' + encodeURIComponent(failed_register_message));
+    //response.redirect('register?message=' + encodeURIComponent(failed_register_message));
   }
 });
 
-function userExists(request, response, next) {
-  const customer = customerDAO.getSpecificCustomer(`username = '${request.body.username}'`);
+function userExists(username) {
+  const customer = customerDAO.getSpecificCustomer(`username = '${username}'`);
   customer.then((customer) => {
     if (customer.length >= 1) {
       return true;
@@ -184,7 +190,7 @@ app.post('/create_carpool_route', (request, response) => {
     max_passengers: maximum_passengers,
   };
   carpoolDAO.addCarpool(carpool_obj);
-  response.render('carpool/index', )
+  response.render('carpool/index', {user: request.user});
 });
 
 app.get('/login-success', (request, response, next) => {

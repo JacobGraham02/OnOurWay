@@ -6,7 +6,7 @@ block content
     -if (failed_register_message !== undefined) {
         p.desciption= failed_register_message
     -}
-    form.form-default.margin-left-64(action='/register' method='post')
+    form.form-default.margin-left-64(action='/register' method='post' enctype="multipart/form-data")
         ul.list-for-register
             li
                 label.form-label(for='username') E-mail address or mobile phone number:
@@ -38,5 +38,14 @@ block content
             li
                 label.form-label(for='email') Email:
                 input#username.form-input(type='text' name='email')
+            li 
+                label.form-label(for='avatar') Choose your photo identification:
+                <input type="file" id="avatar" name="avatar" style="cursor: pointer;" accept="image/png, image/jpeg">
+                aside#image_container 
+                    img#image_output_from_upload
         button.button-main(action='submit') Register your account
         .margin-left-64
+    script(src='javascripts/display_form_image.js')
+    
+    //- <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+//- <p><img id="output" width="200" /></p>
