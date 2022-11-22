@@ -108,6 +108,11 @@ passport.deserializeUser(function(userId, done) {
   });
 });
 
+/*
+Test user:
+Username: test7@gmail.com
+Password: test
+*/
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/login-success',
   failureRedirect: '/login-failure'
@@ -136,10 +141,10 @@ app.post('/register', upload.single('avatar'), (request, response, next) => {
     image_path: customer_image.path,
   };
   if (!userExists(request.body.username)) {
-    //customerDAO.addCustomer(customer_information_obj);
-    //response.redirect('login?message=' + encodeURIComponent(success_register_message));
+    customerDAO.addCustomer(customer_information_obj);
+    response.redirect('login?message=' + encodeURIComponent(success_register_message));
   } else {
-    //response.redirect('register?message=' + encodeURIComponent(failed_register_message));
+    response.redirect('register?message=' + encodeURIComponent(failed_register_message));
   }
 });
 

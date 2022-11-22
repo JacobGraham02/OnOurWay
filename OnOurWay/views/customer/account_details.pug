@@ -34,4 +34,10 @@ block content
                 label#credit_card_expiry_date(for='credit_card_expiry_date') Credit card expiry date= account_information.credit_card_expiry_date 
                 input#credit_card_expiry_date_text_field(type='text' name='credit_card_expiry_date' required='' value=account_information.credit_card_expiry_date)
 
+                label.form-label(for='avatar') Your profile picture
+                <input type="file" id="avatar" name="avatar" style="cursor: pointer;" accept="image/png, image/jpeg">
+                aside#image_container 
+                    img#image_output_from_upload(src='/' + account_information.path_to_image)
+
             button#submit_account_details_button(type='submit') Click me to save your changes (if any)
+    script(src='javascripts/display_form_image.js')
