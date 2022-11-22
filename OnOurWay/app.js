@@ -13,7 +13,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const customerDAO = require('./persistence/CustomerDAO');
 const carpoolDAO = require('./persistence/CarpoolDAO');
 const encryptAndValidatePassword = require('./modules/EncryptionAndValidation');
-const DOMAIN = 'http://localhost:3005';
 
 var driverRouter = require('./routes/driver');
 var indexRouter = require('./routes/index');
@@ -66,7 +65,7 @@ const usernameAndPasswordFormFields = {
 /*
 Test user credentials:
 in mysql database: TestUsername
-username: Jacob
+username: test@gmail.com
 password: test1234
 email: test@gmail.com
 */
@@ -202,22 +201,24 @@ Date: Any future date (11/24)
 Postal code: L2N L2N
 */
 app.post('/create-checkout-session', async (request, response) => {
+  const user = request.user;
+  const carpool_id = request.body.carpool_id;
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
         price_data: {
           currency: 'cad',
           product_data: {
-            name: 'T-shirt',
+            name: 'Carpool ticket',
           },
-          unit_amount: 100,
+          unit_amount: 32500,
         },
         quantity: 1,
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:3005/',
-    cancel_url: 'http://localhost:3005/',
+    success_url: `http://localhost:3005/customer/carpool_list?user_id=${user.id}&carpool_id=${carpool_id}`,
+    cancel_url: `http://localhost:3005/customer/carpool_list`,
   });
   response.redirect(303, session.url);
 });
