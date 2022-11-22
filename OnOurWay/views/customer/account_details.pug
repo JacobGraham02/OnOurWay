@@ -1,9 +1,9 @@
 extends ../layout
 
 block content
-    article#account_details_information 
+    article#account_details_information.account-detail-article
         form#account_details_form(action='/update-account-info', method='POST') 
-            fieldset#account_details_fieldset
+            fieldset#account_details_fieldset.account-detail-fieldset 
                 label#username(for='username') Username
                 input#username_text_field(type='text' name='username' required='' value=account_information.username)
 
@@ -19,7 +19,7 @@ block content
                 label#email(for='email') Email
                 input#email_text_field(type='text' name='email' required='' value=account_information.email)
 
-            fieldset#account_payment_information_fieldset
+            fieldset#account_payment_information_fieldset.account-detail-fieldset 
                 label#credit_card_number(for='credit_card_number') Credit card number
                 input#credit_card_number_text_field(type='text' name='credit_card_number' required='' value=account_information.credit_card_number).account-details-cc-hide
 
@@ -31,5 +31,4 @@ block content
 
                 label#credit_card_expiry_date(for='credit_card_expiry_date') Credit card expiry date
                 input#credit_card_expiry_date_text_field(type='text' name='credit_card_expiry_date' required='' value=account_information.credit_card_expiry_date).account-details-cc-hide
-
-            button#submit_account_details_button(type='submit') Click me to save your changes (if any)
+            button#submit_account_details_button.account-detail-fieldset(type='submit') Click me to save your changes (if any)

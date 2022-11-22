@@ -15,7 +15,7 @@ body {
 #account_details_fieldset, #account_payment_information_fieldset {
   display: flex;
   flex-direction: column;
-  border: 2px dashed pink;
+  border: 2px solid black;
   width: 25%;
   margin: 2%;
 }
@@ -199,4 +199,18 @@ body {
 .account-details-cc-hide:hover{
   color: black;
   text-shadow:none;
+}
+
+.account-detail-fieldset{
+  width: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  margin:auto;
+}
+.account-detail-article{
+  margin: auto;
+  width: 100%;
+  max-width: 1000px;
+  padding:10px;
+  background-color: #ccc;
 }
