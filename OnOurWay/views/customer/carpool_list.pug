@@ -2,7 +2,9 @@ extends ../layout
 
 block content
 
-  p= message
-  h1 This is the carpool list for customer page
-  h2
-    a(href='/carpool/') Click me to view your list of carpools
+  article#list_of_user_carpools_container 
+    ul#list_of_user_carpools 
+      -for (let i = 0; i < user_carpool_information.length; i++) {
+        li#user_carpool_list_item
+          a(href=`/carpool/detailed_route?id=${user_carpool_information[i].id}`)= "Carpool starting address: " + user_carpool_information[i].starting_address + " Carpool ending address: " + user_carpool_information[i].ending_address
+      -}

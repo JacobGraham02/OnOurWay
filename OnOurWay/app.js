@@ -184,6 +184,7 @@ app.post('/create_carpool_route', (request, response) => {
     max_passengers: maximum_passengers,
   };
   carpoolDAO.addCarpool(carpool_obj);
+  response.render('carpool/index', )
 });
 
 app.get('/login-success', (request, response, next) => {
@@ -202,7 +203,17 @@ Postal code: L2N L2N
 */
 app.post('/create-checkout-session', async (request, response) => {
   const user = request.user;
+  const user_id = request.user.id;
   const carpool_id = request.body.carpool_id;
+  console.log("User id is: " + user_id);
+  console.log("Carpool id is: " + carpool_id);
+  const query_where_clause = `id = ${carpool_id}`;
+  carpoolDAO.getSpecificCarpoolPassenger(query_where_clause).then((results) => {
+    console.log(results.length);
+    if (results.length === 0) {
+      carpoolDAO.addCarpoolPassenger(user_id, carpool_id);
+    } 
+  });
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {

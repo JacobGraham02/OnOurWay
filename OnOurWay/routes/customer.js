@@ -22,19 +22,13 @@ router.get('/account-details', isLoggedIn, function(request, response, next) {
 });
 
 router.get('/carpool_list', function(request, response, next) {
-  const request_user_id = request.query.user_id;
-  const query_where_clause = `id = ${request_user_id}`;
-  // const customer_data = customerDAO.getSpecificCustomer(query_where_clause);
-  // customer_data.then((account_data) => {
-  //   response.render('customer/carpool_list', {user: account_data});
-  // }); 
-  // const request_parameter_id = request.query.id;
-  // const query_where_clause = `id = ${request_parameter_id}`;
-  // const customer_data = customerDAO.getSpecificCustomer(query_where_clause);
-  // customer_data.then((account_data) => {
-  
-  // }); 
-  response.render('customer/carpool_list', {user: request.user});
+  const user_id = request.query.user_id;
+  const carpool_id = request.query.carpool_id;
+  carpoolDAO.getCustomerCarpoolWithJoin(user_id, carpool_id).then((user_carpools) => {
+    const user_specific_carpools = user_carpools;
+    console.log(user_specific_carpools);
+     response.render('customer/carpool_list', {user: request.user, user_carpool_information: user_specific_carpools});
+  });
 });
 
 /* GET home page. */
