@@ -11,10 +11,6 @@ body {
   padding: 0;
   text-align: center;
 }
-main{
-  margin:auto;
-  width:50%;
-}
 
 #account_details_fieldset, #account_payment_information_fieldset {
   display: flex;
@@ -134,6 +130,8 @@ main{
 }
 .form-label {
   font-size: 110%;
+  margin:auto;
+  width:50%;
 }
 .form-input {
   display: block;
@@ -194,6 +192,8 @@ main{
   -moz-columns: 2;
   text-decoration: none;
   list-style: none;
+  margin:auto;
+  width:50%;
 }
 
 .account-details-cc-hide{
