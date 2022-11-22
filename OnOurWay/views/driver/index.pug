@@ -1,7 +1,6 @@
-head
-  title Buy cool new product
-  link(href='/stylesheets/style.css' type='text/css' rel='stylesheet')
-main
+extends ../layout
+
+block content
   article#google-maps-gui
   form
     label Start typing your address and choose your address from the generated list
@@ -14,5 +13,3 @@ main
     label Country
     input#country_text_field(type='text' required='')
     button(type='submit') Click me to submit
-script(src="/javascripts/google_maps.js")
-script(async='' defer='' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAKz3oZ9x--Z_1py4gMmwS0ETUG112nXJY&libraries=places&callback=initMap&v=weekly')
