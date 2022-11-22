@@ -14,8 +14,8 @@ const customerDAO = require('./persistence/CustomerDAO');
 const carpoolDAO = require('./persistence/CarpoolDAO');
 const encryptAndValidatePassword = require('./modules/EncryptionAndValidation');
 const multer_upload_path = './public/images/customer_images'
+const database_upload_path = '/images/customer_images/';
 const multer = require('multer');
-const upload = multer({ dest: multer_upload_path })
 
 var driverRouter = require('./routes/driver');
 var indexRouter = require('./routes/index');
@@ -66,6 +66,16 @@ const usernameAndPasswordFormFields = {
   username_field: 'username',
   password_field: 'password',
 };
+
+const multerStorageEngine = multer.diskStorage({
+  destination: multer_upload_path,
+  filename: (request, file, cb) => {
+    cb(null, `${file.originalname}`);
+  },
+});
+const upload = multer({
+  storage: multerStorageEngine,
+});
 /*
 Test user credentials:
 in mysql database: TestUsername
@@ -126,6 +136,8 @@ app.post('/register', upload.single('avatar'), (request, response, next) => {
   const customer_password_obj = encryptAndValidatePassword.encryptPassword(request.body.password);
   const customer_password = customer_password_obj.password;
   const customer_password_salt = customer_password_obj.salt;
+  const customer_credit_card_effective_date = customer_data.credit_card_effective_date.slice(0, 10);
+  const customer_credit_card_expiry_date = customer_data.credit_card_expiry_date.slice(0, 10);
   const customer_information_obj = {
     username: customer_data.username,
     password: customer_password,
@@ -134,11 +146,11 @@ app.post('/register', upload.single('avatar'), (request, response, next) => {
     last_name: customer_data.last_name,
     credit_card_number: customer_data.credit_card_number,
     credit_card_cvc: customer_data.credit_card_cvc,
-    credit_card_effective_date: customer_data.credit_card_effective_date,
-    credit_card_expiry_date: customer_data.credit_card_expiry_date,
+    credit_card_effective_date: customer_credit_card_effective_date,
+    credit_card_expiry_date: customer_credit_card_expiry_date,
     phone_number: customer_data.phone_number,
     email: customer_data.email,
-    image_path: customer_image.path,
+    image_path: `${database_upload_path}` + customer_image.filename,
   };
   if (!userExists(request.body.username)) {
     customerDAO.addCustomer(customer_information_obj);
