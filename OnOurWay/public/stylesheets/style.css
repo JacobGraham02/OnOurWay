@@ -10,6 +10,8 @@ body {
   margin: auto;
   padding: 0;
   text-align: center;
+  font-family:'Courier New', Courier, monospace;
+  font-size:14px;
 }
 
 #account_details_fieldset, #account_payment_information_fieldset {
@@ -248,4 +250,8 @@ body {
 .account-detail-textfield{
   margin:auto;
   width:auto;
+}
+.li-text-decor{
+  text-decoration: none;
+  list-style-type: none;
 }
