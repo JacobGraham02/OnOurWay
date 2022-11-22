@@ -26,12 +26,15 @@ FROM Carpool INNER JOIN Carpool_Passenger ON Carpool.id = Carpool_Passenger.carp
 -- credit_card_effective_date="2022-11-14", credit_card_expiry_date="2022-11-14" WHERE email = 'test@gmail.com';
 
 -- INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
--- DELETE FROM Customer WHERE id < 1000;
+DELETE FROM Customer WHERE id < 1000;
 SELECT * FROM Carpool;
-
+SET foreign_key_checks = 0;
+SET foreign_key_checks = 1;
 -- DELETE FROM Carpool WHERE id < 1000;
 
 ALTER TABLE Customer ADD path_to_image varchar(255);
+ALTER TABLE Customer DROP COLUMN user_type;
+ALTER TABLE Customer ADD user_type varchar(8) NOT NULL;
 
 CREATE TABLE Passenger (
 	id int NOT NULL PRIMARY KEY,
