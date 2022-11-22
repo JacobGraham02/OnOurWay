@@ -170,7 +170,10 @@ body {
   background-image: url('/images/roadway.jpg'); /*https://www.pexels.com/photo/empty-blacktop-road-under-cloudy-sky-1125895/*/
   background-size:cover;
 }
-
+.background-register{
+  background-image: url('/images/roadway.jpg'); /*https://www.pexels.com/photo/empty-blacktop-road-under-cloudy-sky-1125895/*/
+  background-size:contain;
+}
 .container{  
   justify-content: center;
   align-items: center ;
@@ -180,4 +183,11 @@ body {
   margin:0 auto;
   display:flex;
   opacity: 1;
+}
+.list-for-register{
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  text-decoration: none;
+  list-style: none;
 }
