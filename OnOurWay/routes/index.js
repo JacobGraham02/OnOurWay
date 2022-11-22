@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 const customerDAO = require('../persistence/CarpoolDAO');
 
+function isLoggedIn(request, response, next) {
+  if (request.isAuthenticated()) {
+    return next();
+  } else {
+    response.redirect('/login');
+  }
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express', user:req.user });
@@ -15,7 +23,7 @@ router.get('/login', function(request, response, next) {
   }
 });
 
-router.get('/logout', function(request, response, next) {
+router.get('/logout', isLoggedIn, function(request, response, next) {
   request.logout(function(error) {
     if (error) {
       return next(error);

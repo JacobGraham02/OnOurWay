@@ -21,7 +21,7 @@ router.get('/account-details', isLoggedIn, function(request, response, next) {
     });
 });
 
-router.get('/carpool_list', function(request, response, next) {
+router.get('/carpool_list', isLoggedIn, function(request, response, next) {
   if ( request.query.carpool_id === undefined) {
     const user_id = request.query.id;
     carpoolDAO.getCustomerCarpools(user_id).then((user_carpools) => {
@@ -56,7 +56,7 @@ router.get('/detailed_route', isLoggedIn, function(request, response, next) {
   });
 });
 
-router.get('/create_carpool_route', function(request, response, next) {
+router.get('/create_carpool_route', isLoggedIn, function(request, response, next) {
   response.render('carpool/detailed_routes', {user: request.user});
 });
 
