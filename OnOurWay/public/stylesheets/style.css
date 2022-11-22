@@ -191,3 +191,12 @@ body {
   text-decoration: none;
   list-style: none;
 }
+
+.account-details-cc-hide{
+  color: transparent;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+.account-details-cc-hide:hover{
+  color: black;
+  text-shadow:none;
+}
