@@ -22,8 +22,9 @@ router.get('/account-details', isLoggedIn, function(request, response, next) {
 });
 
 router.get('/carpool_list', function(request, response, next) {
-  if (request.query.user_id === undefined || request.query.carpool_id === undefined) {
-    carpoolDAO.getCustomerCarpools().then((user_carpools) => {
+  if ( request.query.carpool_id === undefined) {
+    const user_id = request.query.id;
+    carpoolDAO.getCustomerCarpools(user_id).then((user_carpools) => {
       const user_specific_carpools = user_carpools;
       response.render('customer/carpool_list', {user: request.user, user_carpool_information: user_specific_carpools});
     });
@@ -38,11 +39,10 @@ router.get('/carpool_list', function(request, response, next) {
   }
 });
 
-/* GET home page. */
 router.get('/', isLoggedIn, function(req, res, next) {
   const carpool_locations = carpoolDAO.getAllFromCarpool();
   carpool_locations.then((results) => {
-    res.render('carpool/index', {carpool_locations: results});
+    res.render('carpool/index', {title: 'Welcome to OnOurWay!', carpool_locations: results, user: req.user});
   });
 });
 
