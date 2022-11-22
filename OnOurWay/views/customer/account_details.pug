@@ -6,31 +6,31 @@ block content
         form#account_details_form.account-detail-form(action='/update-account-info', method='POST') 
             fieldset#account_details_fieldset.account-detail-fieldset 
                 label#username(for='username') Username
-                input#username_text_field(type='text' name='username' required='' value=account_information.username)
+                input#username_text_field.account-detail-textfield(type='text' name='username' required='' value=account_information.username)
 
                 label#firstname(for='first_name') First name
-                input#firstname_text_field(type='text' name='first_name' required='' value=account_information.first_name)
+                input#firstname_text_field.account-detail-textfield(type='text' name='first_name' required='' value=account_information.first_name)
 
                 label#lastname(for='last_name') Last name
-                input#lastname_text_field(type='text' name='last_name' required='' value=account_information.last_name)
+                input#lastname_text_field.account-detail-textfield(type='text' name='last_name' required='' value=account_information.last_name)
 
                 label#phone_number(for='phone_number') Phone number
-                input#phone_number_text_field(type='text' name='phone_number' required='' value=account_information.phone_number)
+                input#phone_number_text_field.account-detail-textfield(type='text' name='phone_number' required='' value=account_information.phone_number)
 
                 label#email(for='email') Email
-                input#email_text_field(type='text' name='email' required='' value=account_information.email)
+                input#email_text_field.account-detail-textfield(type='text' name='email' required='' value=account_information.email)
 
             fieldset#account_payment_information_fieldset.account-detail-fieldset 
                 label#credit_card_number(for='credit_card_number') Credit card number
-                input#credit_card_number_text_field(type='text' name='credit_card_number' required='' value=account_information.credit_card_number).account-details-cc-hide
+                input#credit_card_number_text_field.account-detail-textfield(type='text' name='credit_card_number' required='' value=account_information.credit_card_number).account-details-cc-hide
 
                 label#credit_card_cvc(for='credit_card_cvc') Credit card cvc
-                input#credit_card_cvc_text_field(type='text' name='credit_card_cvc' required='' value=account_information.credit_card_cvc).account-details-cc-hide
+                input#credit_card_cvc_text_field.account-detail-textfield(type='text' name='credit_card_cvc' required='' value=account_information.credit_card_cvc).account-details-cc-hide
 
                 label#credit_card_effective_date(for='credit_card_effective_date') Credit card effective date
-                input#credit_card_effective_date_text_field(type='text' name='credit_card_effective_date' required='' value=account_information.credit_card_effective_date).account-details-cc-hide
+                input#credit_card_effective_date_text_field.account-detail-textfield(type='text' name='credit_card_effective_date' required='' value=account_information.credit_card_effective_date).account-details-cc-hide
 
                 label#credit_card_expiry_date(for='credit_card_expiry_date') Credit card expiry date
-                input#credit_card_expiry_date_text_field(type='text' name='credit_card_expiry_date' required='' value=account_information.credit_card_expiry_date).account-details-cc-hide
+                input#credit_card_expiry_date_text_field.account-detail-textfield(type='text' name='credit_card_expiry_date' required='' value=account_information.credit_card_expiry_date).account-details-cc-hide
                 h2
             button#submit_account_details_button.button-account-detail(type='submit') Click me to save your changes (if any)

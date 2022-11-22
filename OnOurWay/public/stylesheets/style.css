@@ -221,6 +221,7 @@ body {
   width:auto;
   margin:auto;
   padding:25px;
+  padding-right: 25px;
 }
 .button-account-detail{
   width:50%;
@@ -242,4 +243,9 @@ body {
   background-color: var(--primary-color);
   background-size: 100%;
   transition: background 0s;
+}
+
+.account-detail-textfield{
+  margin:auto;
+  width:auto;
 }
