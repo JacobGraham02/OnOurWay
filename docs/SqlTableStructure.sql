@@ -20,11 +20,12 @@ CREATE TABLE Customer (
     phone_number varchar(100) NOT NULL UNIQUE,
     email varchar(100) NOT NULL UNIQUE
 );
+SELECT Carpool.id, Carpool.starting_address, Carpool.ending_address, Carpool.maximum_passengers, Carpool_Passenger.id, Carpool_passenger.carpool_id 
+FROM Carpool INNER JOIN Carpool_Passenger ON Carpool.id = Carpool_Passenger.carpool_id AND Carpool_Passenger.id = 10;
+-- UPDATE CUSTOMER SET username="TestUsername", first_name="Jacob", last_name="Graham", phone_number="(888) 888-8888", email="test@gmail.com", credit_card_number="255", credit_card_cvc="255", 
+-- credit_card_effective_date="2022-11-14", credit_card_expiry_date="2022-11-14" WHERE email = 'test@gmail.com';
 
-UPDATE CUSTOMER SET username="TestUsername", first_name="Jacob", last_name="Graham", phone_number="(888) 888-8888", email="test@gmail.com", credit_card_number="255", credit_card_cvc="255", 
-credit_card_effective_date="2022-11-14", credit_card_expiry_date="2022-11-14" WHERE email = 'test@gmail.com';
-
-INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
+-- INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
 -- DELETE FROM Customer WHERE id < 1000;
 SELECT * FROM Carpool;
 
@@ -75,11 +76,16 @@ CREATE TABLE Vehicle (
 );
 
 CREATE TABLE Carpool_Passenger (
-	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id int NOT NULL,
     carpool_id int NOT NULL,
-    FOREIGN KEY (id) REFERENCES Passenger (id),
+    FOREIGN KEY (id) REFERENCES Customer (id),
     FOREIGN KEY (carpool_id) REFERENCES Carpool (id)
 );
+
+SELECT * FROM Carpool_Passenger;
+
+DROP TABLE IF EXISTS Carpool_Passenger;
+
 ALTER TABLE Carpool_Passenger MODIFY COLUMN id INT auto_increment;
 
 CREATE TABLE Driver_car (
@@ -88,3 +94,6 @@ CREATE TABLE Driver_car (
     FOREIGN KEY (id) REFERENCES Driver (id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicle (id)
 );
+
+INSERT INTO Carpool_Passenger (id, carpool_id) VALUES ('10', '5')
+
