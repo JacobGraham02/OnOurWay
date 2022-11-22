@@ -111,6 +111,23 @@ const getCustomerCarpoolWithJoin = function(user_id, carpool_id) {
     });
 }
 
+const getCustomerCarpools = function() {
+    console.log('get customer carpools no queries');
+    let query_string = `SELECT Carpool.id, Carpool.starting_address, Carpool.ending_address, Carpool.maximum_passengers, Carpool_Passenger.id, Carpool_passenger.carpool_id 
+    FROM Carpool INNER JOIN Carpool_Passenger ON Carpool.id = Carpool_Passenger.carpool_id`;
+    return new Promise(function(resolve, reject) {
+         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
+              connection.query(query_string, function(error, results) {
+                  if (error) {
+                    reject(error);
+                  }
+                  resolve(results);
+                  connection.release();
+              });
+         });
+    });
+}
+
 const deleteCarpool = function(where) {
     const where_clause_string = concatenateSqlQueryStringForWhereClause(where);  
     let query_string = `DELETE FROM Carpool WHERE ${where_clause_string}`;
@@ -176,3 +193,4 @@ exports.deleteCarpool = deleteCarpool;
 exports.addCarpoolPassenger = addCarpoolPassenger;
 exports.getCustomerCarpoolWithJoin = getCustomerCarpoolWithJoin;
 exports.getSpecificCarpoolPassenger = getSpecificCarpoolPassenger;
+exports.getCustomerCarpools = getCustomerCarpools;

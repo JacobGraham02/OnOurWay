@@ -22,6 +22,12 @@ router.get('/account-details', isLoggedIn, function(request, response, next) {
 });
 
 router.get('/carpool_list', function(request, response, next) {
+  if (request.query.user_id === undefined || request.query.carpool_id === undefined) {
+    carpoolDAO.getCustomerCarpools().then((user_carpools) => {
+      const user_specific_carpools = user_carpools;
+      response.render('customer/carpool_list', {user: request.user, user_carpool_information: user_specific_carpools});
+    });
+  } else {
   const user_id = request.query.user_id;
   const carpool_id = request.query.carpool_id;
   carpoolDAO.getCustomerCarpoolWithJoin(user_id, carpool_id).then((user_carpools) => {
@@ -29,6 +35,7 @@ router.get('/carpool_list', function(request, response, next) {
     console.log(user_specific_carpools);
      response.render('customer/carpool_list', {user: request.user, user_carpool_information: user_specific_carpools});
   });
+  }
 });
 
 /* GET home page. */

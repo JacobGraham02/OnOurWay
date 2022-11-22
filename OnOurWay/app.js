@@ -202,11 +202,8 @@ Date: Any future date (11/24)
 Postal code: L2N L2N
 */
 app.post('/create-checkout-session', async (request, response) => {
-  const user = request.user;
   const user_id = request.user.id;
   const carpool_id = request.body.carpool_id;
-  console.log("User id is: " + user_id);
-  console.log("Carpool id is: " + carpool_id);
   const query_where_clause = `id = ${carpool_id}`;
   carpoolDAO.getSpecificCarpoolPassenger(query_where_clause).then((results) => {
     console.log(results.length);
@@ -228,7 +225,7 @@ app.post('/create-checkout-session', async (request, response) => {
       },
     ],
     mode: 'payment',
-    success_url: `http://localhost:3005/customer/carpool_list?user_id=${user.id}&carpool_id=${carpool_id}`,
+    success_url: `http://localhost:3005/customer/carpool_list?user_id=${user_id}&carpool_id=${carpool_id}`,
     cancel_url: `http://localhost:3005/customer/carpool_list`,
   });
   response.redirect(303, session.url);
