@@ -66,8 +66,12 @@ CREATE TABLE Carpool (
 	id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
     starting_address varchar(100),
     ending_address varchar(100),
-    maximum_passengers int NOT NULL CONSTRAINT max_passengers_nine CHECK (maximum_passengers <= 9)
+    maximum_passengers int NOT NULL CONSTRAINT max_passengers_nine CHECK (maximum_passengers <= 9),
+    start_time varchar(50) NOT NULL,
+    end_time varchar(50) NOT NULL
 );
+
+DROP TABLE Carpool;
 
 CREATE TABLE Vehicle (
 	id int NOT NULL PRIMARY KEY UNIQUE,
