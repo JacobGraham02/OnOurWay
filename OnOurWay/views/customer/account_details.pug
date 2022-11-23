@@ -3,6 +3,11 @@ extends ../layout
 block content
     article#account_details_information.account-detail-article
         h1 Account Details
+        
+        form#account_details_form(action='/update-account-info', method='POST') 
+            fieldset#account_details_fieldset
+                label#username(for='username') Username= account_information.username
+                input#username_text_field(type='text' name='username' value=account_information.username required)
 
         article#account_details_information 
             form#account_details_form(action='/update-account-info', method='POST') 
@@ -18,7 +23,7 @@ block content
 
                     label#phone_number(for='phone_number') Phone number= account_information.phone_number 
                     input#phone_number_text_field(type='text' name='phone_number' value=account_information.phone_number required)
-
+                    
                     label#email(for='email') Email= account_information.email 
                     input#email_text_field(type='text' name='email' value=account_information.email required)
 
