@@ -9,6 +9,8 @@ block content
         li#carpool_list_item_start_address= "Carpool starting address: " + carpool_information.starting_address
         li#carpool_list_item_end_address= "Carpool ending address: " + carpool_information.ending_address 
         li#carpool_list_item_maximum_passengers= "Maximum passengers allowed in carpool: " + carpool_information.maximum_passengers
+        li#carpool_list_start_time= "Start time of carpool: " + carpool_information.start_time
+        li#carpool_list_end_time= "End time of carpool: " + carpool_information.end_time 
   div#directions_sidebar
 
   form(action='/create-checkout-session', method='POST')

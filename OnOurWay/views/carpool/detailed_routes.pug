@@ -6,26 +6,31 @@ block content
     form(action='/create_carpool_route' method='POST')
       label Start typing your address and choose your address from the generated list
       label Address
-      input#address_text_field(type='text' name='address_1' required='')
+      input#address_text_field(type='text' name='address_1' required)
       label Postal code
-      input#postal_code_text_field(type='text' name='postal_code_1' required='')
+      input#postal_code_text_field(type='text' name='postal_code_1' required)
       label Locality
-      input#locality_text_field(type='text' name='locality_1' required='')
+      input#locality_text_field(type='text' name='locality_1' required)
       label Country
-      input#country_text_field(type='text' name='country_1' required='')
+      input#country_text_field(type='text' name='country_1' required)
 
       label Start typing your address and choose your address from the generated list
       label Address
-      input#address_2_text_field(type='text' name='address_2' required='')
+      input#address_2_text_field(type='text' name='address_2' required)
       label Postal code
-      input#postal_code_2_text_field(type='text' name='postal_code_2' required='')
+      input#postal_code_2_text_field(type='text' name='postal_code_2' required)
       label Locality
-      input#locality_2_text_field(type='text' name='locality_2' required='')
+      input#locality_2_text_field(type='text' name='locality_2' required)
       label Country
-      input#country_2_text_field(type='text' name='country_2' required='')
+      input#country_2_text_field(type='text' name='country_2' required)
+
+      label Start time 
+      input#carpool_start_time_text_field(type='text' name='start_time' required)
+      label End time 
+      input#carpool_end_time_text_field(type='text' name='end_time' required)
 
       label Maximum passengers 
-      input#max_passengers(type='text' name='maximum_passengers' required='')
+      input#max_passengers(type='text' name='maximum_passengers' required)
       
       button#submit_form_button(type='submit') Click me to submit
     script(src='/javascripts/google_maps.js')

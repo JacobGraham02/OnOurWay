@@ -14,6 +14,17 @@ body {
   font-size:14px;
 }
 
+#image_container  {
+  width: 200px;
+  height: 200px;
+  border: 2px dashed pink;
+}
+#image_output_from_upload {
+  width: 90%;
+  height: 90%;
+  border: 2px dashed blue;
+}
+
 #account_details_fieldset, #account_payment_information_fieldset {
   display: flex;
   flex-direction: column;

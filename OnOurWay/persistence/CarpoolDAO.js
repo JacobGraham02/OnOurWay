@@ -33,11 +33,10 @@ const getSpecificCarpool= function(where) {
 };
 
 const addCarpool = function(carpool) {
-    console.log("add carpool is run");
-    let query_string = `INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES (?, ?, ?)`;
+    let query_string = `INSERT INTO Carpool (starting_address, ending_address, maximum_passengers, start_time, end_time) VALUES (?, ?, ?, ?, ?)`;
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
-            connection.query(query_string, [carpool.start_address, carpool.end_address, carpool.max_passengers], function(error, results) {
+            connection.query(query_string, [carpool.start_address, carpool.end_address, carpool.max_passengers, carpool.start_time, carpool.end_time], function(error, results) {
                 if (error) {
                     reject(error);
                 }
@@ -64,6 +63,71 @@ const updateCarpool = function(query_data) {
         });
     });
 };
+
+const getSpecificCarpoolPassenger = function(where) {
+    const where_clause = concatenateSqlQueryStringForWhereClause(where);
+    let query_string = `SELECT * FROM Carpool_Passenger WHERE ${where_clause}`;
+    return new Promise(function(resolve, reject) {
+        database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
+            connection.query(query_string, function(error, results) {
+                if (error) {
+                    reject(error)
+                }
+                resolve(results);
+                connection.release();
+            });
+        });
+    });
+}
+
+const addCarpoolPassenger = function(user_id, carpool_id) {
+    let query_string = `INSERT INTO Carpool_Passenger (id, carpool_id) VALUES (?, ?)`;
+    return new Promise(function(resolve, reject) {
+        database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
+            connection.query(query_string, [user_id, carpool_id], function(error, results) {
+                if (error) {
+                    reject(error)
+                }
+                resolve(results);
+                connection.release();
+            });
+        });
+    });
+};
+
+const getCustomerCarpoolWithJoin = function(user_id, carpool_id) {
+    let query_string = `SELECT Carpool.id, Carpool.starting_address, Carpool.ending_address, Carpool.maximum_passengers, Carpool_Passenger.id, Carpool_passenger.carpool_id 
+    FROM Carpool INNER JOIN Carpool_Passenger ON Carpool.id = Carpool_Passenger.carpool_id AND Carpool_Passenger.id = ${user_id}`;
+    console.log(query_string);
+    return new Promise(function(resolve, reject) {
+         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
+              connection.query(query_string, function(error, results) {
+                  if (error) {
+                    reject(error);
+                  }
+                  resolve(results);
+                  connection.release();
+              });
+         });
+    });
+}
+
+const getCustomerCarpools = function(user_id) {
+    let query_string = `SELECT Carpool.id, Carpool.starting_address, Carpool.ending_address, Carpool.maximum_passengers, Carpool_Passenger.id, Carpool_passenger.carpool_id 
+    FROM Carpool INNER JOIN Carpool_Passenger ON Carpool.id = Carpool_Passenger.carpool_id AND Carpool_Passenger.id = ${user_id}`;
+    console.log(query_string);
+    return new Promise(function(resolve, reject) {
+         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
+              connection.query(query_string, function(error, results) {
+                  if (error) {
+                    reject(error);
+                  }
+                  resolve(results);
+                  connection.release();
+              });
+         });
+    });
+}
 
 const deleteCarpool = function(where) {
     const where_clause_string = concatenateSqlQueryStringForWhereClause(where);  
@@ -127,3 +191,7 @@ exports.getSpecificCarpool = getSpecificCarpool;
 exports.addCarpool = addCarpool;
 exports.updateCarpool = updateCarpool;
 exports.deleteCarpool = deleteCarpool;
+exports.addCarpoolPassenger = addCarpoolPassenger;
+exports.getCustomerCarpoolWithJoin = getCustomerCarpoolWithJoin;
+exports.getSpecificCarpoolPassenger = getSpecificCarpoolPassenger;
+exports.getCustomerCarpools = getCustomerCarpools;
