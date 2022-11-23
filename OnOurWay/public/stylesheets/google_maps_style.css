@@ -1,7 +1,9 @@
 #google-maps-gui {
     display: flex;
     align-self: center;
-    border: 2px dashed green;
-    height: 80%;
-    width: 80%;
+    border: 2px solid var(--primary-color);
+    height: 475%;
+    width: 50%;
+    position:relative;
+    margin:auto;
 }

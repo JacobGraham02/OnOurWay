@@ -1,8 +1,12 @@
 extends ../layout
 
 block content
-
-    
+    article#account_details_information.account-detail-article
+        h1 Account Details
+        form#account_details_form.account-detail-form(action='/update-account-info', method='POST') 
+            fieldset#account_details_fieldset.account-detail-fieldset 
+                label#username(for='username') Username
+                input#username_text_field.account-detail-textfield(type='text' name='username' required='' value=account_information.username)
     article#account_details_information 
         form#account_details_form(action='/update-account-info', method='POST') 
             fieldset#account_details_fieldset
