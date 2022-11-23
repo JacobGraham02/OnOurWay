@@ -3,8 +3,9 @@ extends ../layout
 block content
 
   article#list_of_carpools_container
+    h1 The list of available carpools in the area
     ul#list_of_carpools
       -for (let i = 0; i < carpool_locations.length; i++) {
-        li#carpool_list_item.li-text-decor
-          a(href=`/carpool/detailed_route?id=${carpool_locations[i].id}`)= "Carpool starting address: " + carpool_locations[i].starting_address + " Carpool ending address: " + carpool_locations[i].ending_address
+        li#carpool_list_item
+          a(href=`/carpool/detailed_route?id=${carpool_locations[i].id}`)= "Carpool starting address: " + carpool_locations[i].starting_address +  "  | Carpool ending address: " + carpool_locations[i].ending_address
       -} 

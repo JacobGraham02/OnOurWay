@@ -3,39 +3,46 @@ extends ../layout
 block content
     article#account_details_information.account-detail-article
         h1 Account Details
+        
         form#account_details_form(action='/update-account-info', method='POST') 
             fieldset#account_details_fieldset
                 label#username(for='username') Username= account_information.username
                 input#username_text_field(type='text' name='username' value=account_information.username required)
 
-                label#firstname(for='first_name') First name= account_information.first_name 
-                input#firstname_text_field(type='text' name='first_name' value=account_information.first_name required)
+        article#account_details_information 
+            form#account_details_form(action='/update-account-info', method='POST') 
+                fieldset#account_details_fieldset
+                    label#username(for='username') Username= account_information.username
+                    input#username_text_field(type='text' name='username' value=account_information.username required)
 
-                label#lastname(for='last_name') Last name= account_information.last_name 
-                input#lastname_text_field(type='text' name='last_name' value=account_information.last_name required)
+                    label#firstname(for='first_name') First name= account_information.first_name 
+                    input#firstname_text_field(type='text' name='first_name' value=account_information.first_name required)
 
-                label#phone_number(for='phone_number') Phone number= account_information.phone_number 
-                input#phone_number_text_field(type='text' name='phone_number' value=account_information.phone_number required)
+                    label#lastname(for='last_name') Last name= account_information.last_name 
+                    input#lastname_text_field(type='text' name='last_name' value=account_information.last_name required)
 
-                label#email(for='email') Email= account_information.email 
-                input#email_text_field(type='text' name='email' value=account_information.email required)
+                    label#phone_number(for='phone_number') Phone number= account_information.phone_number 
+                    input#phone_number_text_field(type='text' name='phone_number' value=account_information.phone_number required)
+                    
+                    label#email(for='email') Email= account_information.email 
+                    input#email_text_field(type='text' name='email' value=account_information.email required)
 
-            fieldset#account_payment_information_fieldset
-                label#credit_card_number(for='credit_card_number') Credit card number= account_information.credit_card_number 
-                input#credit_card_number_text_field.account-details-cc-hide(type='text' name='credit_card_number' value=account_information.credit_card_number required)
+                fieldset#account_payment_information_fieldset
+                    label#credit_card_number(for='credit_card_number') Credit card number= account_information.credit_card_number 
+                    input#credit_card_number_text_field(type='text' name='credit_card_number' value=account_information.credit_card_number required)
 
-                label#credit_card_cvc(for='credit_card_cvc') Credit card cvc= account_information.credit_card_cvc 
-                input#credit_card_cvc_text_field.account-details-cc-hide(type='text' name='credit_card_cvc' value=account_information.credit_card_cvc required)
+                    label#credit_card_cvc(for='credit_card_cvc') Credit card cvc= account_information.credit_card_cvc 
+                    input#credit_card_cvc_text_field(type='text' name='credit_card_cvc' value=account_information.credit_card_cvc required)
 
-                label#credit_card_effective_date(for='credit_card_effective_date') Credit card effective date= account_information.credit_card_effective_date 
-                input#credit_card_effective_date_text_field.account-details-cc-hide(type='text' name='credit_card_effective_date' value=account_information.credit_card_effective_date required)
+                    label#credit_card_effective_date(for='credit_card_effective_date') Credit card effective date= account_information.credit_card_effective_date 
+                    input#credit_card_effective_date_text_field(type='text' name='credit_card_effective_date' value=account_information.credit_card_effective_date required)
 
-                label#credit_card_expiry_date(for='credit_card_expiry_date') Credit card expiry date= account_information.credit_card_expiry_date 
-                input#credit_card_expiry_date_text_field.account-details-cc-hide(type='text' name='credit_card_expiry_date' value=account_information.credit_card_expiry_date required)
+                    label#credit_card_expiry_date(for='credit_card_expiry_date') Credit card expiry date= account_information.credit_card_expiry_date 
+                    input#credit_card_expiry_date_text_field(type='text' name='credit_card_expiry_date' value=account_information.credit_card_expiry_date required)
 
-                label.form-label(for='avatar') Your profile picture
-                <input type="file" id="avatar" name="avatar" style="cursor: pointer;" accept="image/png, image/jpeg">
-                aside#image_container 
-                    img#image_output_from_upload(src='/images/customer_images/BrandenYoshaev.png')
+                    label.form-label(for='path_to_image') Your profile picture
+                    <input type="file" id="path_to_image" name="path_to_image" style="cursor: pointer;" accept="image/png, image/jpeg">
+                    aside#image_container 
+                        img#image_output_from_upload(src=account_information.path_to_image)
 
-            button#submit_account_details_button(type='submit') Click me to save your changes (if any)
+                button#submit_account_details_button(type='submit') Click me to save your changes (if any)
