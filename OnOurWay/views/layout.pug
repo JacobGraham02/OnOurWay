@@ -14,16 +14,17 @@ html
             a(href='/login-success')
               img.navbar-logo(src='/images/onourway.png')
           li.navbar-item= message 
-          li.navbar-item.navbar-item-right-align 
-              a(href='/carpool/create_carpool_route') Create a carpool route
+
           li.navbar-item.navbar-item-right-align 
               a(href='/logout') Log out of your account
           li.navbar-item.navbar-item-right-align 
             a(href=`/customer/carpool_list?id=${user_id}`) View your list of carpools
           li.navbar-item.navbar-item-right-align 
             a(href=`/customer/account-details?id=${user_id}`) Account details
+          li.navbar-item.navbar-item-right-align 
+            a(href='/carpool/create_carpool_route') Create a carpool route
           li.navbar-item.navbar-item-right-align
-            a(href='/driver/') Drive for a trip
+            a(href="/carpool/") View Carpool Availability
 
         else 
           li.navbar-item 
