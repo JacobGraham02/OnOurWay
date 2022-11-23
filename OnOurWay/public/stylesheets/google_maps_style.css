@@ -1,9 +1,47 @@
 #google-maps-gui {
-    display: flex;
-    align-self: center;
+    display: block;
     border: 2px solid var(--primary-color);
-    height: 475%;
+    height: 100%;
     width: 50%;
     position:relative;
     margin:auto;
+}
+#carpool_detailed_list {
+    text-align: center;
+    display: inline-block;
+    list-style-type: none;
+}
+#carpool_detailed_list > li {
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+#buy_ticket_label {
+    font-weight: bold;
+}
+#submit_form_button {
+    text-align: center;
+    display: block;
+}
+#carpool_ticket_buy_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+#carpool_ticket_buy_form > * {
+    margin-bottom: 1%;
+}
+#submit_ticket_buy_form_button {
+    width: 150px;
+    height: 40px;
+}
+body {
+    margin: auto;
+    padding: 0;
+    text-align: center;
+    font-family:'Courier New', Courier, monospace;
+    font-size:14px;
+}
+#directions_sidebar {
+    display: inline-block;
 }

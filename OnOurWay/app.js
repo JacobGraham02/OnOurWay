@@ -253,7 +253,7 @@ app.post('/create-checkout-session', async (request, response) => {
           product_data: {
             name: 'Carpool ticket',
           },
-          unit_amount: 32500,
+          unit_amount: 3250,
         },
         quantity: 1,
       },

@@ -25,6 +25,14 @@ body {
   border: 2px dashed blue;
 }
 
+#list_of_carpools {
+  list-style-type: none;
+}
+
+#list_of_carpools > li {
+  margin-bottom: 2%;
+}
+
 #account_details_fieldset, #account_payment_information_fieldset {
   display: flex;
   flex-direction: column;
