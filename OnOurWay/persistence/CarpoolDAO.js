@@ -33,10 +33,10 @@ const getSpecificCarpool= function(where) {
 };
 
 const addCarpool = function(carpool) {
-    let query_string = `INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES (?, ?, ?)`;
+    let query_string = `INSERT INTO Carpool (starting_address, ending_address, maximum_passengers, start_time, end_time) VALUES (?, ?, ?, ?, ?)`;
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
-            connection.query(query_string, [carpool.start_address, carpool.end_address, carpool.max_passengers], function(error, results) {
+            connection.query(query_string, [carpool.start_address, carpool.end_address, carpool.max_passengers, carpool.start_time, carpool.end_time], function(error, results) {
                 if (error) {
                     reject(error);
                 }

@@ -196,6 +196,9 @@ app.post('/create_carpool_route', (request, response) => {
   const ending_locality = request.body.locality_2;
   const ending_country = request.body.country_2;
 
+  const carpool_start_time = request.body.start_time;
+  const carpool_end_time = request.body.end_time;
+
   const starting_address = `${starting_street_name}, ${starting_locality}, ${starting_country}, ${starting_postal_code}`;
   const ending_address = `${ending_street_name}, ${ending_locality}, ${ending_country}, ${ending_postal_code}`;
 
@@ -205,9 +208,11 @@ app.post('/create_carpool_route', (request, response) => {
     start_address: starting_address,
     end_address: ending_address,
     max_passengers: maximum_passengers,
+    start_time: carpool_start_time,
+    end_time: carpool_end_time,
   };
   carpoolDAO.addCarpool(carpool_obj);
-  response.render('carpool/index', {user: request.user});
+  response.render('carpool/index', {title: 'Index', user: request.user});
 });
 
 app.get('/login-success', (request, response, next) => {
