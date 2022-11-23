@@ -229,6 +229,12 @@ CVC: Any 3 digits (123)
 Date: Any future date (11/24)
 Postal code: L2N L2N
 */
+app.post('/cancel_carpool_reservation', (request, response, next) => {
+  const id = request.body.carpool_id;
+  carpoolDAO.deleteCarpoolPassenger(id).then((results) => {
+    response.render('customer/carpool_list', {message: 'You have successfully cancelled a carpool reservation', user: request.user});
+  });
+});
 app.post('/create-checkout-session', async (request, response) => {
   const user_id = request.user.id;
   const carpool_id = request.body.carpool_id;
