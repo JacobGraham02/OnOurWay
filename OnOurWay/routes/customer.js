@@ -26,15 +26,15 @@ router.get('/carpool_list', isLoggedIn, function(request, response, next) {
     const user_id = request.query.id;
     carpoolDAO.getCustomerCarpools(user_id).then((user_carpools) => {
       const user_specific_carpools = user_carpools;
-      response.render('customer/carpool_list', {user: request.user, user_carpool_information: user_specific_carpools});
+      response.render('customer/carpool_list', {user: request.user, title: "Your carpool routes", user_carpool_information: user_specific_carpools});
     });
   } else {
   const user_id = request.query.user_id;
   const carpool_id = request.query.carpool_id;
   carpoolDAO.getCustomerCarpoolWithJoin(user_id, carpool_id).then((user_carpools) => {
     const user_specific_carpools = user_carpools;
-    console.log(user_specific_carpools);
-     response.render('customer/carpool_list', {user: request.user, user_carpool_information: user_specific_carpools});
+    console.log("User specific fields yes carpool id: " + user_specific_carpools);
+     response.render('customer/carpool_list', {user: request.user, title: "Your carpool routes", user_carpool_information: user_specific_carpools});
   });
   }
 });

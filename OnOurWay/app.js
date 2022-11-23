@@ -216,11 +216,11 @@ app.post('/create_carpool_route', (request, response) => {
 });
 
 app.get('/login-success', (request, response, next) => {
-  response.render('customer/index', {message: 'You have successfully logged in', user: request.user});
+  response.render('customer/index', {title: "Welcome to OnOurWay!", message: 'You have successfully logged in', user: request.user});
 });
 
 app.get('/login-failure', (request, response, next) => {
-  response.render('login', {message: 'Invalid login credentials. Please try again with another set of credentials'});
+  response.render('login', {title: "Invalid login", message: 'Invalid login credentials. Please try again with another set of credentials'});
 });
 /*
 Stripe Visa test card
@@ -232,7 +232,7 @@ Postal code: L2N L2N
 app.post('/cancel_carpool_reservation', (request, response, next) => {
   const id = request.body.carpool_id;
   carpoolDAO.deleteCarpoolPassenger(id).then((results) => {
-    response.render('customer/carpool_list', {message: 'You have successfully cancelled a carpool reservation', user: request.user});
+    response.render('customer/index', {message: 'You have successfully cancelled this carpool reservation', user: request.user});
   });
 });
 app.post('/create-checkout-session', async (request, response) => {
@@ -260,7 +260,7 @@ app.post('/create-checkout-session', async (request, response) => {
     ],
     mode: 'payment',
     success_url: `http://localhost:3005/customer/carpool_list?user_id=${user_id}&carpool_id=${carpool_id}`,
-    cancel_url: `http://localhost:3005/customer/carpool_list`,
+    cancel_url: `http://localhost:3005/customer/index`,
   });
   response.redirect(303, session.url);
 });
