@@ -51,8 +51,8 @@ router.get('/detailed_route', isLoggedIn, function(request, response, next) {
   const query_where_clause = `id = ${request_parameter_id}`;
   const carpool_result = carpoolDAO.getSpecificCarpool(query_where_clause);
   carpool_result.then((carpool) => {
-    const carpool_information = carpool[0]; 
-    response.render('carpool/view_detailed_route', {title: 'Detailed route', carpool_information: carpool_information, user:request.user});
+    const carpool_info = carpool[0]; 
+    response.render('carpool/view_detailed_route', {title: 'Detailed route', carpool_information: carpool_info, user:request.user});
   });
 });
 
