@@ -14,15 +14,13 @@ body {
   font-size:14px;
 }
 
-#image_container  {
+#image_container{
   width: 200px;
-  height: 200px;
-  border: 2px dashed pink;
+  height: 130px;
 }
 #image_output_from_upload {
   width: 90%;
   height: 90%;
-  border: 2px dashed blue;
 }
 
 #list_of_carpools {
@@ -37,11 +35,12 @@ body {
   display: flex;
   flex-direction: column;
   border: 2px solid black;
-  width: 25%;
+  margin:auto;
+  width:50%;
   margin: 2%;
 }
 #account_details_information input, #account_payment_information input{
-  width: 50%;
+  width: 100%;
 }
 .button-main{
   color: black;
@@ -148,6 +147,11 @@ body {
 
 .form-default {
   padding: 10px;
+}
+.form-fieldset{
+  border: 2px solid var(--primary-light-color);
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px var(--primary-dark-color);
 }
 .form-label {
   font-size: 110%;
@@ -273,4 +277,8 @@ body {
 .li-text-decor{
   text-decoration: none;
   list-style-type: none;
+}
+.center{
+  margin: auto;
+  width:50%;
 }
