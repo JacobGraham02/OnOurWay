@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 
-  article#google-maps-gui.maps-offset
+  article#google-maps-gui.max-height
   section#carpool_address_section
     article#carpool_address_container
       ul#carpool_detailed_list
@@ -15,6 +15,7 @@ block content
 
   form#carpool_ticket_buy_form(action='/create-checkout-session', method='POST')
     label#buy_ticket_label(for="carpool_id") Buy a ticket for this carpool
+    br
     input(type="hidden" id="carpool_id_input" name="carpool_id" value=carpool_information.id)
     button#submit_ticket_buy_form_button(type='submit') Click me to submit
   script(src='/javascripts/google_maps_detailed_view.js')
