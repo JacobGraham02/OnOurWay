@@ -188,7 +188,7 @@ body {
 .form-label {
   font-size: 110%;
   margin:auto;
-  width:50%;
+  width:100%;
 }
 .form-input {
   display: block;

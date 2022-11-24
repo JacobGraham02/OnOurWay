@@ -6,7 +6,7 @@ block content
     -if (failed_register_message !== undefined) {
         p.desciption= failed_register_message
     -}
-    form.form-default.margin-left-64(action='/register' method='post' id='register_form' enctype="multipart/form-data")
+    form.form-default(action='/register' method='post' id='register_form' enctype="multipart/form-data")
         ul.list-for-register
             li
                 label.form-label(for='username') E-mail address or mobile phone number:
@@ -64,6 +64,6 @@ block content
                 label.form-label(for='insurance_expiry_date' id="insurance_expiry_date_label") Insurance expiry date:
                 input#insurance_expiry_date.form-input(type='text' name='insurance_expiry_date')
 
-        button.button-main(action='submit') Register your account
-        .margin-left-64
+        //- button.button-main(action='submit') Register your account
+        //- .margin-left-64
     script(src='javascripts/display_form_image.js')
