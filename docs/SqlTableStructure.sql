@@ -25,23 +25,14 @@ FROM Carpool INNER JOIN Carpool_Passenger ON Carpool.id = Carpool_Passenger.carp
 -- UPDATE CUSTOMER SET username="TestUsername", first_name="Jacob", last_name="Graham", phone_number="(888) 888-8888", email="test@gmail.com", credit_card_number="255", credit_card_cvc="255", 
 -- credit_card_effective_date="2022-11-14", credit_card_expiry_date="2022-11-14" WHERE email = 'test@gmail.com';
 
--- INSERT INTO Carpool (starting_address, ending_address, maximum_passengers) VALUES ("Test starting address 1", "Test ending address 1", 9);
+INSERT INTO Carpool (starting_address, ending_address, maximum_passengers, start_time, end_time) VALUES ("Test starting address 1", "Test ending address 1", 9, "12:00", "17:00"); 
 DELETE FROM Customer WHERE id < 1000;
+DELETE FROM Carpool_Passenger WHERE id < 1000;
+DELETE FROM Carpool WHERE id < 1000;
 SELECT * FROM Carpool;
 SET foreign_key_checks = 0;
 SET foreign_key_checks = 1;
 -- DELETE FROM Carpool WHERE id < 1000;
-
-ALTER TABLE Customer ADD path_to_image varchar(255);
-ALTER TABLE Customer DROP COLUMN user_type;
-ALTER TABLE Customer ADD user_type varchar(8) NOT NULL;
-ALTER TABLE Customer ADD insurance_policy_number varchar(30);
-ALTER TABLE Customer ADD insurance_effective_date DATE;
-ALTER TABLE Customer ADD insurance_expiry_date DATE;
-ALTER TABLE Customer MODIFY COLUMN user_type VARCHAR(30);
-ALTER TABLE Customer MODIFY COLUMN insurance_effective_date DATE DEFAULT NULL;
-ALTER TABLE Customer MODIFY COLUMN insurance_expiry_date DATE DEFAULT NULL;
-ALTER TABLE Customer MODIFY COLUMN insurance_policy_number varchar(30) DEFAULT NULL;
 
 
 CREATE TABLE Passenger (
