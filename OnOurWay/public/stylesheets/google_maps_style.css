@@ -1,7 +1,7 @@
 #google-maps-gui {
     display: block;
     border: 2px solid var(--primary-color);
-    height: 400%;
+    height: 100%;
     width: 50%;
     position:relative;
     margin:auto;

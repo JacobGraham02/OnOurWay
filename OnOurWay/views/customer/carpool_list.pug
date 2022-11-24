@@ -5,9 +5,9 @@ block content
   article#list_of_user_carpools_container 
     ul#list_of_user_carpools 
       -for (let i = 0; i < user_carpool_information.length; i++) {
-        li#user_carpool_list_item
-          a(href=`/carpool/detailed_route?id=${user_carpool_information[i].carpool_id}`)= "Carpool starting address: " + user_carpool_information[i].starting_address + " Carpool ending address: " + user_carpool_information[i].ending_address
-          form(action='/cancel_carpool_reservation' method='POST')
+        li#user_carpool_list_item.form-fieldset.universal-padding.li-text-decor
+          a.button-main(href=`/carpool/detailed_route?id=${user_carpool_information[i].carpool_id}`)= "Carpool starting address: " + user_carpool_information[i].starting_address + " Carpool ending address: " + user_carpool_information[i].ending_address
+          form.universal-padding(action='/cancel_carpool_reservation' method='POST')
             input(type="hidden" id="carpool_id" name="carpool_id" value=user_carpool_information[i].id)
-            button#cancel_carpool_reservation Cancel carpool reservation
+            button.button-main#cancel_carpool_reservation Cancel carpool reservation
       -}

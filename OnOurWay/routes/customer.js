@@ -57,7 +57,7 @@ router.get('/detailed_route', isLoggedIn, function(request, response, next) {
 });
 
 router.get('/create_carpool_route', isLoggedIn, function(request, response, next) {
-  response.render('carpool/detailed_routes', {user: request.user});
+  response.render('carpool/detailed_routes', {title: 'Create a carpool route', user: request.user});
 });
 
 module.exports = router;
