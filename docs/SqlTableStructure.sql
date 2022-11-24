@@ -35,6 +35,14 @@ SET foreign_key_checks = 1;
 ALTER TABLE Customer ADD path_to_image varchar(255);
 ALTER TABLE Customer DROP COLUMN user_type;
 ALTER TABLE Customer ADD user_type varchar(8) NOT NULL;
+ALTER TABLE Customer ADD insurance_policy_number varchar(30);
+ALTER TABLE Customer ADD insurance_effective_date DATE;
+ALTER TABLE Customer ADD insurance_expiry_date DATE;
+ALTER TABLE Customer MODIFY COLUMN user_type VARCHAR(30);
+ALTER TABLE Customer MODIFY COLUMN insurance_effective_date DATE DEFAULT NULL;
+ALTER TABLE Customer MODIFY COLUMN insurance_expiry_date DATE DEFAULT NULL;
+ALTER TABLE Customer MODIFY COLUMN insurance_policy_number varchar(30) DEFAULT NULL;
+
 
 CREATE TABLE Passenger (
 	id int NOT NULL PRIMARY KEY,
@@ -88,6 +96,8 @@ CREATE TABLE Carpool_Passenger (
     FOREIGN KEY (id) REFERENCES Customer (id),
     FOREIGN KEY (carpool_id) REFERENCES Carpool (id)
 );
+SELECT Carpool.id, Carpool.starting_address, Carpool.ending_address, Carpool.maximum_passengers, Carpool_Passenger.id, Carpool_passenger.carpool_id 
+    FROM Carpool INNER JOIN Carpool_Passenger ON Carpool.id = Carpool_Passenger.carpool_id AND Carpool_Passenger.id = 29;
 
 SELECT * FROM Carpool_Passenger;
 
