@@ -17,7 +17,7 @@ router.get('/account-details', isLoggedIn, function(request, response, next) {
     const customer_data = customerDAO.getSpecificCustomer(query_where_clause);
     customer_data.then((account_data) => {
         const user_account_data = account_data[0];
-        response.render(`customer/account_details`, {account_information: user_account_data, user: request.user})
+        response.render(`customer/account_details`, {title: 'View or edit your account details', account_information: user_account_data, user: request.user})
     });
 });
 

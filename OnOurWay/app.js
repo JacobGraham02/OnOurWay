@@ -218,7 +218,10 @@ app.post('/create_carpool_route', (request, response) => {
     end_time: carpool_end_time,
   };
   carpoolDAO.addCarpool(carpool_obj);
-  response.render('carpool/index', {title: 'Index', user: request.user});
+
+  carpoolDAO.getAllFromCarpool().then((results) => {
+    response.render('carpool/index', {title: 'Index', carpool_locations: results, user: request.user});
+  });
 });
 
 app.get('/login-success', (request, response, next) => {
@@ -266,7 +269,7 @@ app.post('/create-checkout-session', async (request, response) => {
     ],
     mode: 'payment',
     success_url: `http://localhost:3005/customer/carpool_list?user_id=${user_id}&carpool_id=${carpool_id}`,
-    cancel_url: `http://localhost:3005/customer/index`,
+    cancel_url: `http://localhost:3005/index`,
   });
   response.redirect(303, session.url);
 });
