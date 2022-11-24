@@ -20,6 +20,11 @@ block content
             li
                 label.form-label(for='last_name') Last name:
                 input#password.form-input(type='text' name='last_name' required)
+            li 
+                label.form-label(for='avatar') Choose your photo identification:
+                <input type="file" id="avatar" name="avatar" style="cursor: pointer;" accept="image/png, image/jpeg" required>
+                aside#image_container 
+                    img#image_output_from_upload
             li
                 label.form-label(for='credit_card_number') Credit card number:
                 input#username.form-input(type='text' name='credit_card_number' required)
@@ -38,6 +43,7 @@ block content
             li
                 label.form-label(for='email') Email:
                 input#username.form-input(type='text' name='email' required)
+                
             li 
                 label.form-label(for='avatar') Choose your photo identification:
                 <input type="file" id="avatar" name="avatar" style="cursor: pointer;" accept="image/png, image/jpeg" required>
