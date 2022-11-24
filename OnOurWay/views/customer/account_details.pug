@@ -1,41 +1,55 @@
 extends ../layout
 
 block content
-    article#account_details_information.account-detail-article
-        h1 Account Details
-            form#account_details_form.form-default(action='/update-account-info', method='POST') 
-                fieldset.form-fieldset
-                    label#username.form-label(for='username') Username
-                    input#username_text_field.form-input(type='text' name='username' value=account_information.username required)
+    article#account_details_information
+    h1 Account Details
 
-                    label#firstname.form-label(for='first_name') First name
-                    input#firstname_text_field.form-input(type='text' name='first_name' value=account_information.first_name required)
+        article#account_details_information.account-detail-article
+            form#account_details_form.account_detail_form(action='/update-account-info', method='POST') 
+                fieldset#account_details_fieldset.account_detail_fieldset
+                    label#username(for='username') Username
+                    input#username_text_field(type='text' name='username' value=account_information.username required)
 
-                    label#lastname.form-label(for='last_name') Last name
-                    input#lastname_text_field.form-input(type='text' name='last_name' value=account_information.last_name required)
+                    label#firstname(for='first_name') First name
+                    input#firstname_text_field(type='text' name='first_name' value=account_information.first_name required)
 
-                    label#phone_number.form-label(for='phone_number') Phone number
-                    input#phone_number_text_field.form-input(type='text' name='phone_number' value=account_information.phone_number required)
+                    label#lastname(for='last_name') Last name
+                    input#lastname_text_field(type='text' name='last_name' value=account_information.last_name required)
+
+                    label#phone_number(for='phone_number') Phone number
+                    input#phone_number_text_field(type='text' name='phone_number' value=account_information.phone_number required)
                     
-                    label#email.form-label(for='email') Email
-                    input#email_text_field.form-input(type='text' name='email' value=account_information.email required)
+                    label#email(for='email') Email
+                    input#email_text_field(type='text' name='email' value=account_information.email required)
 
-                fieldset.form-fieldset
-                    label#credit_card_number.form-label(for='credit_card_number') Credit card number
-                    input#credit_card_number_text_field.form-input.account-details-cc-hide(type='text' name='credit_card_number' value=account_information.credit_card_number required)
+                fieldset#account_payment_information_fieldset
+                    label#credit_card_number(for='credit_card_number') Credit card number
+                    input#credit_card_number_text_field(type='text' name='credit_card_number' value=account_information.credit_card_number required)
 
-                    label#credit_card_cvc.form-label(for='credit_card_cvc') CVV
-                    input#credit_card_cvc_text_field.form-input.account-details-cc-hide(type='text' name='credit_card_cvc' value=account_information.credit_card_cvc required)
+                    label#credit_card_cvc(for='credit_card_cvc') Credit card cvc
+                    input#credit_card_cvc_text_field(type='text' name='credit_card_cvc' value=account_information.credit_card_cvc required)
 
-                    label#credit_card_effective_date.form-label(for='credit_card_effective_date') Credit card effective date
-                    input#credit_card_effective_date_text_field.form-input.account-details-cc-hide(type='text' name='credit_card_effective_date' value=account_information.credit_card_effective_date required)
+                    label#credit_card_effective_date(for='credit_card_effective_date') Credit card effective date
+                    input#credit_card_effective_date_text_field(type='text' name='credit_card_effective_date' value=account_information.credit_card_effective_date required)
 
-                    label#credit_card_expiry_date.form-label(for='credit_card_expiry_date') Credit card expiry date
-                    input#credit_card_expiry_date_text_field.form-input.account-details-cc-hide(type='text' name='credit_card_expiry_date' value=account_information.credit_card_expiry_date required)
+                    label#credit_card_expiry_date(for='credit_card_expiry_date') Credit card expiry date
+                    input#credit_card_expiry_date_text_field(type='text' name='credit_card_expiry_date' value=account_information.credit_card_expiry_date required)
 
-                    label.form-label.form-label(for='path_to_image') Your profile picture
+                    label#user_type(for='user_type') User type
+                    input#user_type_text_field(type='text' name='user_type' value=account_information.user_type required)
+
+                    label#car_insurance_policy_number(for='insurance_policy_number') Car insurance policy number
+                    input#car_insurance_policy_number_text_field(type='text' name='insurance_policy_number' value=account_information.insurance_policy_number required)
+
+                    label#car_insurance_effective_date(for='insurance_effective_date') Car insurance effective date
+                    input#car_insurance_effective_date_text_field(type='text' name='insurance_effective_date' value=account_information.insurance_effective_date required)
+
+                    label#car_insurance_expiry_date(for='insurance_expiry_date') Car insurance expiry date
+                    input#car_insurance_expiry_date_text_field(type='text' name='insurance_expiry_date' value=account_information.insurance_expiry_date required)
+
+                    label.form-label(for='path_to_image') Your profile picture
                     <input type="file" id="path_to_image" name="path_to_image" style="cursor: pointer;" accept="image/png, image/jpeg">
                     aside#image_container 
-                        img#image_output_from_upload(src=account_information.path_to_image)
+                        img#image_output_from_upload(src=`${account_information.path_to_image}`)
 
-                button#submit_account_details_button.button-main(type='submit') Click me to save your changes (if any)
+                button#submit_account_details_button(type='submit') Save your changes

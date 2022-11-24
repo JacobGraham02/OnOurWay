@@ -132,6 +132,7 @@ app.post('/register', upload.single('avatar'), (request, response, next) => {
   const failed_register_message = "A user with this account already exists. Please try again using another set of credentials";
   const success_register_message = "You have successfully registered an account. Please log in using your credentials";
   const customer_data = request.body;
+  console.log(customer_data);
   const customer_image = request.file;
   const customer_password_obj = encryptAndValidatePassword.encryptPassword(request.body.password);
   const customer_password = customer_password_obj.password;
@@ -151,6 +152,10 @@ app.post('/register', upload.single('avatar'), (request, response, next) => {
     phone_number: customer_data.phone_number,
     email: customer_data.email,
     image_path: `${database_upload_path}` + customer_image.filename,
+    user_type: customer_data.user_type,
+    insurance_policy_number: customer_data.insurance_policy_number,
+    insurance_effective_date: customer_data.insurance_effective_date,
+    insurance_expiry_date: customer_data.insurance_expiry_date,
   };
   if (!userExists(request.body.username)) {
     customerDAO.addCustomer(customer_information_obj);
@@ -171,6 +176,7 @@ function userExists(username) {
   });
 }
 app.post('/update-account-info', (request, response) => {
+  console.log(Object.keys(request.body));
   const account_email = request.body.email;
   const [...object_keys] = Object.keys(request.body);
   const [...object_values] = Object.values(request.body);
@@ -182,7 +188,7 @@ app.post('/update-account-info', (request, response) => {
     where_clause: `email = "${account_email}"`,
   };
   customerDAO.updateCustomer(customer_obj);
-  response.render('customer/index', {message: 'You have successfully updated your account information', user: request.user});
+  response.render('customer/index', {Title: 'Welcome back!', message: 'You have successfully updated your account information', user: request.user});
 });
 
 app.post('/create_carpool_route', (request, response) => {
@@ -216,11 +222,11 @@ app.post('/create_carpool_route', (request, response) => {
 });
 
 app.get('/login-success', (request, response, next) => {
-  response.render('customer/index', {message: 'You have successfully logged in', user: request.user});
+  response.render('customer/index', {title: "Welcome to OnOurWay!", message: 'You have successfully logged in', user: request.user});
 });
 
 app.get('/login-failure', (request, response, next) => {
-  response.render('login', {message: 'Invalid login credentials. Please try again with another set of credentials'});
+  response.render('login', {title: "Invalid login", message: 'Invalid login credentials. Please try again with another set of credentials'});
 });
 /*
 Stripe Visa test card
@@ -232,7 +238,7 @@ Postal code: L2N L2N
 app.post('/cancel_carpool_reservation', (request, response, next) => {
   const id = request.body.carpool_id;
   carpoolDAO.deleteCarpoolPassenger(id).then((results) => {
-    response.render('customer/carpool_list', {message: 'You have successfully cancelled a carpool reservation', user: request.user});
+    response.render('customer/index', {message: 'You have successfully cancelled this carpool reservation', user: request.user});
   });
 });
 app.post('/create-checkout-session', async (request, response) => {
@@ -260,7 +266,7 @@ app.post('/create-checkout-session', async (request, response) => {
     ],
     mode: 'payment',
     success_url: `http://localhost:3005/customer/carpool_list?user_id=${user_id}&carpool_id=${carpool_id}`,
-    cancel_url: `http://localhost:3005/customer/carpool_list`,
+    cancel_url: `http://localhost:3005/customer/index`,
   });
   response.redirect(303, session.url);
 });
