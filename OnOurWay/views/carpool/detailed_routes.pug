@@ -3,8 +3,9 @@ extends ../layout
 block content
 
     article#google-maps-gui
-    form(action='/create_carpool_route' method='POST')
-      label Start typing your address and choose your address from the generated list: 
+    form#create_carpool_route_form(action='/create_carpool_route' method='POST')
+      h1#carpool_starting_address Carpool starting address
+      label Start typing your address in the 'address' box and all the fields below will be auto-filled depending on the address
       label Address
       input#address_text_field(type='text' name='address_1' required)
       label Postal code
@@ -13,8 +14,9 @@ block content
       input#locality_text_field(type='text' name='locality_1' required)
       label Country
       input#country_text_field(type='text' name='country_1' required)
-      br
-      label Start typing your address and choose your address from the generated list: 
+      
+      h1#carpool_ending_address Carpool ending address
+      label Start typing your address in the 'address' box and all the fields below will be auto-filled depending on the address
       label Address
       input#address_2_text_field(type='text' name='address_2' required)
       label Postal code
@@ -32,6 +34,6 @@ block content
       label Maximum passengers 
       input#max_passengers(type='text' name='maximum_passengers' required)
       br
-      button#submit_form_button.button-main(type='submit') Click me to submit
+      button#submit_form_button.button-main(type='submit') Create this carpool route
     script(src='/javascripts/google_maps.js')
     script(async='' defer='' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAKz3oZ9x--Z_1py4gMmwS0ETUG112nXJY&libraries=places&callback=initMap&v=weekly')

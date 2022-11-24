@@ -6,7 +6,7 @@ block content
     -if (failed_register_message !== undefined) {
         p.desciption= failed_register_message
     -}
-    form.form-default.margin-left-64(action='/register' method='post' enctype="multipart/form-data")
+    form.form-default.margin-left-64(action='/register' method='post' id='register_form' enctype="multipart/form-data")
         ul.list-for-register
             li
                 label.form-label(for='username') E-mail address or mobile phone number:
@@ -43,9 +43,25 @@ block content
                 <input type="file" id="avatar" name="avatar" style="cursor: pointer;" accept="image/png, image/jpeg" required>
                 aside#image_container 
                     img#image_output_from_upload
+            li 
+                label(for='user_type_select') Choose your account type:
+                select#user_type_select(required name='user_type')
+                    option(value='Passenger') Passenger
+                    option(value='Driver') Driver
+                    option(value='Driver_and_Passenger') Driver and passenger
+
+            li
+                label.form-label(for='insurance_policy_number' id="insurance_policy_number_label") Insurance policy number:
+                input#insurance_policy_number.form-input(type='text' name='insurance_policy_number')
+
+            li
+                label.form-label(for='effective' id="insurance_effective_date_label") Insurance effective date:
+                input#insurance_effective_date.form-input(type='text' name='insurance_effective_date')
+
+            li
+                label.form-label(for='insurance_expiry_date' id="insurance_expiry_date_label") Insurance expiry date:
+                input#insurance_expiry_date.form-input(type='text' name='insurance_expiry_date')
+
         button.button-main(action='submit') Register your account
         .margin-left-64
     script(src='javascripts/display_form_image.js')
-    
-    //- <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
-//- <p><img id="output" width="200" /></p>

@@ -14,7 +14,7 @@ function isLoggedIn(request, response, next) {
 router.get('/', isLoggedIn, function(req, res, next) {
   const carpool_locations = carpoolDAO.getAllFromCarpool();
   carpool_locations.then((results) => {
-    res.render('carpool/index', {carpool_locations: results, user: req.user});
+    res.render('carpool/index', {title: 'Carpool home', carpool_locations: results, user: req.user});
   });
 });
 
@@ -29,8 +29,12 @@ router.get('/detailed_route', isLoggedIn, function(request, response, next) {
   });
 });
 
-router.get('/create_carpool_route', function(request, response, next) {
-  response.render('carpool/detailed_routes', {title: 'Create a carpool route', user: request.user});
+router.get('/create_carpool_route', isLoggedIn, function(request, response, next) {
+  if (request.user.user_type === 'Passenger') {
+    response.render('carpool/index', {title: 'Carpool home'});
+  } else {
+    response.render('carpool/detailed_routes', {title: 'Create a carpool route', user: request.user});
+  }
 });
 
 module.exports = router;

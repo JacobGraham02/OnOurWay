@@ -38,11 +38,24 @@ const getSpecificCustomer= function(where) {
 };
 
 const addCustomer = function(customer) {
-    let query_string = `INSERT INTO CUSTOMER (username, password, salt, first_name, last_name, credit_card_number, credit_card_cvc, credit_card_effective_date, credit_card_expiry_date, phone_number, email, path_to_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    console.log(customer.insurance_effective_date);
+    console.log(customer.insurance_expiry_date);
+    console.log(customer.insurance_policy_number);
+    if (customer.insurance_effective_date === '') {
+        customer.insurance_effective_date = '2022-11-14';
+    }
+    if (customer.insurance_expiry_date === '') {
+        customer.insurance_expiry_date = '2022-11-14'
+    }
+    if (customer.insurance_policy_number === '') {
+        customer.insurance_policy_number = 'null'
+    }
+    let query_string = `INSERT INTO CUSTOMER (username, password, salt, first_name, last_name, credit_card_number, credit_card_cvc, credit_card_effective_date, credit_card_expiry_date, phone_number, email, path_to_image, user_type, insurance_policy_number, insurance_effective_date, insurance_expiry_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     return new Promise(function(resolve, reject) {
         database_manager.initialize_database_connection_pool().getConnection(function(error, connection) {
             connection.query(query_string, [customer.username, customer.password, customer.salt, customer.first_name, customer.last_name, customer.credit_card_number, 
-                customer.credit_card_cvc, customer.credit_card_effective_date, customer.credit_card_expiry_date, customer.phone_number, customer.email, customer.image_path], 
+                customer.credit_card_cvc, customer.credit_card_effective_date, customer.credit_card_expiry_date, customer.phone_number, customer.email, customer.image_path,
+                customer.user_type, customer.insurance_policy_number, customer.insurance_effective_date, customer.insurance_expiry_date], 
                 function(error, results) {
                 if (error) {
                     reject(error);

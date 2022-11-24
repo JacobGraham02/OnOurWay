@@ -21,8 +21,9 @@ html
             a(href=`/customer/carpool_list?id=${user_id}`) View your list of carpools
           li.navbar-item.navbar-item-right-align 
             a(href=`/customer/account-details?id=${user_id}`) Account details
-          li.navbar-item.navbar-item-right-align 
-            a(href='/carpool/create_carpool_route') Create a carpool route
+          if user.user_type !== 'Passenger' 
+            li.navbar-item.navbar-item-right-align 
+              a(href='/carpool/create_carpool_route') Create a carpool route
 
         else 
           li.navbar-item 
